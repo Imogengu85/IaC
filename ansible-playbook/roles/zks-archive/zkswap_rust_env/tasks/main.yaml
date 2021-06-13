@@ -1,0 +1,82 @@
+- name: check if env file is existed
+  shell: "[ -e {{zkswap_rust_env}} ]"
+  register: checkfile
+  ignore_errors: yes
+
+- name: make env file
+  copy:
+    src: "{{zkswap_home}}/etc/env/dev.env.example"
+    dest: "{{zkswap_rust_env}}"
+    owner: ps
+    group: ps
+    mode: '0755'
+    remote_src: yes
+    backup: yes
+  when: checkfile.rc!=0
+
+- name: set MNEMONIC. !! NOT SUITABLE FOR PRODUCTION !!
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^MNEMONIC='
+    line: 'MNEMONIC="{{GOVERNOR_MNEMONIC}}"'
+
+- name: set OPERATOR_PRIVATE_KEY. !! NOT SUITABLE FOR PRODUCTION !!
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^OPERATOR_PRIVATE_KEY='
+    line: 'OPERATOR_PRIVATE_KEY={{VALIDATOR_PRIVATE_KEY}}'
+
+- name: set OPERATOR_COMMIT_ETH_ADDRESS.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^OPERATOR_COMMIT_ETH_ADDRESS='
+    line: 'OPERATOR_COMMIT_ETH_ADDRESS={{VALIDATOR_ADDR}}'
+
+- name: set OPERATOR_FEE_ETH_ADDRESS.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^OPERATOR_FEE_ETH_ADDRESS='
+    line: 'OPERATOR_FEE_ETH_ADDRESS={{VALIDATOR_ADDR}}'
+
+- name: set WEB3_URL.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^WEB3_URL='
+    line: 'WEB3_URL={{FULL_NODE_URL}}'
+
+- name: set CHAIN_ID.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^CHAIN_ID='
+    line: 'CHAIN_ID={{CHAIN_ID}}'
+
+- name: set L2_CHAIN_ID.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^L2_CHAIN_ID='
+    line: 'L2_CHAIN_ID={{L2_CHAIN_ID}}'
+    
+- name: set DATABASE_URL.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^DATABASE_URL='
+    line: 'DATABASE_URL={{DATABASE_URL}}'
+
+- name: set ETH_NETWORK.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^ETH_NETWORK='
+    line: 'ETH_NETWORK={{ETH_NETWORK}}'
+
+- name: set ADMIN_SERVER_API_URL.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^ADMIN_SERVER_API_URL='
+    line: 'ADMIN_SERVER_API_URL={{ADMIN_SERVER_API_URL}}'
+
+- name: set ADMIN_SERVER_API_BIND.
+  lineinfile:
+    path: "{{zkswap_rust_env}}"
+    regexp: '^ADMIN_SERVER_API_BIND='
+    line: 'ADMIN_SERVER_API_BIND={{ADMIN_SERVER_API_BIND}}'
+

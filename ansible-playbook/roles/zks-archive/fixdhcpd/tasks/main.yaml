@@ -1,0 +1,16 @@
+- name: backup dhcpd-fixed.conf
+  shell: cp /etc/dhcp/dhcpd-fixed.conf /etc/dhcp/dhcpd-fixed.conf.bak
+
+- name: update authorized_keys
+  copy:
+    src: 'files/dhcpd-fixed.conf'
+    dest: /etc/dhcp/dhcpd-fixed.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: dhcpd-restart
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: isc-dhcp-server

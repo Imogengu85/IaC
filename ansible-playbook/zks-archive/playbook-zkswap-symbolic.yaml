@@ -1,0 +1,5 @@
+- hosts: sim-prover
+  become: yes
+  remote_user: root
+  roles: 
+    - zkswap_symbolic

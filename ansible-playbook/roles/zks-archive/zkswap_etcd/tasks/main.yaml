@@ -1,0 +1,57 @@
+
+- name: New directory for etcd data
+  file: 
+    name: /var/lib/etcd/data
+    state: directory
+    mode: 0700
+
+- name: New directory for etcd wal
+  file: 
+    name: /var/lib/etcd/wal
+    state: directory
+    mode: 0700
+
+- name: New directory for etcd binaries
+  file:
+    path: /usr/local/etcd
+    state: directory
+    mode: 0755
+
+- name: Get etcd
+  unarchive: 
+    src: "{{DOWNLOAD_URL}}/{{ ETCD_VER }}/etcd-{{ ETCD_VER }}-linux-amd64.tar.gz"
+    dest: /usr/local/etcd
+    extra_opts: [--strip-components=1]
+    remote_src: yes
+    mode: 0755
+    
+- name: Add path
+  become: yes
+  become_user: ps
+  lineinfile:
+    line: export PATH=/usr/local/etcd:$PATH
+    path: $HOME/.bashrc
+    insertbefore: '^case \$- in'
+
+- name: Get version
+  become: yes
+  become_user: ps
+  become_flags: '-i'
+  shell: etcd --version
+  register: output
+
+- name: Show version
+  debug:
+    var: output.stdout
+
+- name: Upload etcd.service
+  template:
+    dest: /lib/systemd/system/etcd.service
+    src: etcd.service.j2
+    mode: 0440
+
+- name: Start etcd
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: etcd

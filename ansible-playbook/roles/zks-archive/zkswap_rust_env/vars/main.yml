@@ -1,0 +1,13 @@
+---
+zkswap_home: "/home/ps/zkswap-v2"
+zkswap_rust_env: "/home/ps/zkswap-v2/etc/env/dev.env"
+GOVERNOR_MNEMONIC: "gloom upset vanish brisk tobacco pistol chest reopen disease business science vendor"
+VALIDATOR_PRIVATE_KEY: 7910562d50b8d014b74dcab0fb5607418a37697bf66b07edf4a2ee61d24716d4
+VALIDATOR_ADDR: '0x3cDa89ED8eE0A358f3C8485a1aBf72242b38C6F8'
+FULL_NODE_URL: http://ropsten.eth.zks.app:10331
+CHAIN_ID: 3
+L2_CHAIN_ID: 128
+DATABASE_URL: postgres://postgres@172.26.20.81/plasma
+ETH_NETWORK: ropsten
+ADMIN_SERVER_API_URL: "http://0.0.0.0:8080"
+ADMIN_SERVER_API_BIND: "0.0.0.0:8080"

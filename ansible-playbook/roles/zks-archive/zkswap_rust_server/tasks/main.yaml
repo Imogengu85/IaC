@@ -1,0 +1,127 @@
+- name: curl yarn pubkey
+  shell: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
+- name: apt nodejs
+  apt:
+    name: 
+      - 'nodejs'
+      - 'npm'
+    update_cache: true
+    state: present
+
+- name: npm cache clean
+  shell: npm cache clean -f
+
+- name: npm install n
+  npm:
+    global: yes
+    name: "n"
+    state: present
+
+- name: upgrade nodejs
+  shell: n stable && exit
+
+- name: get node version
+  shell: node -v
+  register: nodev
+
+- name: show node version
+  debug:
+    msg: "node version is {{nodev.stdout}}"
+
+- name: get npm version
+  shell: npm -v
+  register: npmv
+
+- name: show npm version
+  debug:
+    msg: "npm version is {{npmv.stdout}}"
+
+- name: add yarn repo
+  lineinfile:
+    line: deb https://dl.yarnpkg.com/debian/ stable main
+    path: /etc/apt/sources.list.d/yarn.list
+    regexp: 'deb https://dl.yarnpkg.com/debian/ stable main'
+    create: yes
+    insertafter: EOF
+
+- name: apt yarn
+  apt:
+    name: yarn
+    update_cache: true
+    state: present
+
+- name: get yarn version
+  shell: yarn -v
+  register: yarnv
+
+- name: show yarn version
+  debug:
+    msg: "yarn version is {{yarnv.stdout}}"
+
+
+- name: yarn add ts-node
+  shell: yarn add ts-node
+
+- name: apt postgresql-client
+  apt:
+    name: postgresql-client-common
+    update_cache: true
+#     state: present
+
+- name: install solc
+  shell: snap install solc
+
+- name:  get HOME dir
+  become: yes
+  become_user: ps
+  shell: echo $HOME
+  register: homedir
+
+- name: show HOME dir
+  debug:
+    var: homedir.stdout
+
+- name: install rust
+  become: yes
+  become_user: ps
+  shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/rust.sh && sh /tmp/rust.sh -y && rm /tmp/rust.sh
+  
+- name: update rust env
+  shell: bash -c "echo source $HOME/.cargo/env >> /etc/bash.bashrc"
+
+- name: install diesel
+  become: yes
+  become_user: ps
+  shell:  PATH=$HOME/.cargo/bin:$PATH && cargo install diesel_cli --no-default-features --features postgres
+
+
+- name: unpack drone
+  unarchive:
+    src: https://github.com/drone/drone-cli/releases/latest/download/drone_linux_amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: get drone version
+  shell: drone -v
+  register: dronev
+
+- name: show drone version
+  debug:
+    msg: "drone version is {{dronev.stdout}}"
+
+
+- name: add zkswap.env in .bashrc
+  lineinfile:
+    line: "{{ item }}"
+    path: /home/ps/.bashrc
+    insertafter: EOF
+  with_items:
+  - export ZKSYNC_HOME=/home/ps/zkswap-v2
+  - export PATH=$ZKSYNC_HOME/bin:$PATH
+  - complete -W "\`grep -oE '^[a-zA-Z0-9_.-]+:([^=]|$)' $ZKSYNC_HOME/Makefile | sed 's/[^a-zA-Z0-9_.-]*$//'\`" zksync
+  - export ZKSYNC_ENV=dev
+  - export ENV_FILE=$ZKSYNC_HOME/etc/env/$ZKSYNC_ENV.env
+  - set -o allexport
+  - eval $(grep -v '^#' $ENV_FILE | sed 's/^/export /')
+  - set +o allexport

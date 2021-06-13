@@ -1,0 +1,19 @@
+- name: backup authorized_keys
+  shell: cp /home/ps/.ssh/authorized_keys /home/ps/.ssh/authorized_keys.bak
+
+# - name: update authorized_keys
+#   copy:
+#     src: 'files/authorized_keys2'
+#     dest: /home/ps/.ssh/authorized_keys
+#     owner: ps
+#     group: ps
+#     mode: 0700
+
+-  name: update authorized_keys
+   template:
+      src: authorized_keys.j2
+      dest: /home/ps/.ssh/authorized_keys
+      owner: ps
+      group: ps
+      mode: 0700
+     

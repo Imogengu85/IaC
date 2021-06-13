@@ -1,0 +1,40 @@
+
+- name: apt redis & redis sentinel
+  apt:
+    name: 
+      - 'redis'
+      - 'redis-sentinel'
+    update_cache: true
+    state: present
+
+- name: upload redis config file 
+  template:
+    dest: /etc/redis/redis.conf
+    src: redis.conf.j2
+    mode: 0640
+
+- name: upload sentinel config file 
+  template:
+    dest: /etc/redis/sentinel.conf
+    src: sentinel.conf.j2
+    mode: 0640
+
+- name: restart master redis
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: redis
+  when: master==1
+
+- name: restart slave redis
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: redis
+  when: master!=1
+
+- name: restart redis-sentinel
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: redis-sentinel

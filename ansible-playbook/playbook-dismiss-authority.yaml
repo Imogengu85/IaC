@@ -1,0 +1,9 @@
+- hosts: 
+    - 210-zks
+    - 195-zks
+    - 102-ops
+  remote_user: root
+  vars:
+    - pubkey1: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2IOROUsLJzpgFE1fWb6/+q/LN3ihloorJLaedRB9496VpZYxgJvpExHmPMFMwcHC4eQfvDswNywlJJm5iAkN64Qppw+Vs4k1qbnTkk3LzgaUDsmo8H4pJPcjvQGef8i9NO7Jk6VNlmaDka5UKwrXw3ac6cRMOBXrAI/1xKOxq/OhQQpjquUe+XYySigPR4KlG8vmBUnwCqQVeLh17XvmOq/eJiQpsar1x8wSFQOwMjGUvMdE+gsBCkZFxa0mrJO0fAcOps+PHXvHs93dc1sKcs1TAzx4aRWVCaKsuEAJRZPnslVjj2xDoCfaLN5pqlcA4legstmt5rzhb8TacI6jOZN0D/Jx6NZk5JqA0zjByOmW/eraGRStpp33JFx0YnEIJIjXddBMsZuVJK05FcJRgNgaBTd9bS0QmoU0fH1izFatxeUjWNw/YIEp6wKj+PUUl34MEayPNFtiJue5mWHS1tAtBwtot4aFE2qPsJZNzZdFvEUL3JsEgrhW2mYiPSlM= fangyulong@zks.org"
+  roles: 
+    - dismiss-authority

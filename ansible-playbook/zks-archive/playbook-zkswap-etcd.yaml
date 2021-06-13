@@ -1,0 +1,5 @@
+- hosts: sim-midd
+  become: yes
+  remote_user: root
+  roles: 
+    - zkswap_etcd

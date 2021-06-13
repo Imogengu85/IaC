@@ -1,0 +1,7 @@
+- name: get ip
+  debug: 
+    var: "{{ansible_ens160.ipv4.address}}"
+
+- name: set hostname
+  shell: "hostnamectl set-hostname v2t1`echo {{ ansible_ens160.ipv4.address }} | cut -d '.' -f 4`"
+

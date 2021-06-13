@@ -1,0 +1,7 @@
+- name: remove pubkey
+  lineinfile:
+    line: "{{ item }}"
+    state: absent
+    path: /home/ps/.ssh/authorized_keys
+  with_items:
+    - "{{ pubkey1 }}"

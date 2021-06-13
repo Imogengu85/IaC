@@ -1,0 +1,9 @@
+---
+mysql_database_name: debug
+mysql_user_name: mysql
+mysql_user_password: qtum100$
+mysql_config_file: /etc/mysql/mysql.conf.d/mysqld.cnf
+mysql_repl_user_name: repl
+mysql_repl_user_password: qtum100$
+mysql_network_grants: "172.26.20.%"
+mysql_master_ip: "172.26.20.32"

@@ -1,0 +1,197 @@
+- name: Create zkswap-v2 path
+  file:
+    path: /data/zkswap-v2
+    state: directory
+    mode: '0755'
+    owner: ps
+    group: ps
+  tags: 
+  - rust
+
+- name: Create a symbolic link for zkswap-v2
+  become: yes
+  become_user: ps
+  file:
+    src: /data/zkswap-v2
+    dest: /home/ps/zkswap-v2
+    owner: ps
+    group: ps
+    state: link
+  tags:
+  - rust
+
+- name: Create zkswap-server-v2 path
+  file:
+    path: /data/zkswap-server-v2
+    state: directory
+    mode: '0755'
+    owner: ps
+    group: ps
+  tags: 
+  - go
+
+- name: Create a symbolic link for zkswap-server-v2
+  become: yes
+  become_user: ps
+  file:
+    src: /data/zkswap-server-v2
+    dest: /home/ps/zkswap-server-v2
+    owner: ps
+    group: ps
+    state: link
+  tags:
+  - go
+
+- name: Create etcd data path
+  file:
+    path: /data/etcd
+    state: directory
+    mode: '0700'
+    owner: root
+    group: root
+  tags: 
+  - midd
+
+- name: Create a symbolic link for etcd data path
+  file:
+    src: /data/etcd
+    dest: /var/lib/etcd
+    owner: root
+    group: root
+    state: link
+  tags:
+  - midd
+
+- name: Create redis data path
+  file:
+    path: /data/redis
+    state: directory
+    mode: '0750'
+    owner: root
+    group: root
+  tags: 
+  - midd
+
+- name: Create a symbolic link for redis data path
+  file:
+    src: /data/redis
+    dest: /var/lib/redis
+    owner: root
+    group: root
+    state: link
+  tags:
+  - midd
+
+
+- name: Create mysql data path
+  file:
+    path: /data/mysql
+    state: directory
+    mode: '0700'
+    owner: root
+    group: root
+  tags: 
+  - midd
+
+- name: Create a symbolic link for mysql data path
+  file:
+    src: /data/mysql
+    dest: /var/lib/mysql
+    owner: root
+    group: root
+    state: link
+  tags:
+  - midd
+
+- name: Create mysql log path
+  file:
+    path: /data/log/mysql
+    state: directory
+    mode: '0750'
+    owner: root
+    group: root
+  tags: 
+  - midd
+
+- name: Create a symbolic link for mysql log path
+  file:
+    src: /data/log/mysql
+    dest: /var/log/mysql
+    owner: root
+    group: root
+    state: link
+  tags:
+  - midd
+
+- name: Create postgresql data path
+  file:
+    path: /data/postgresql
+    state: directory
+    mode: '0700'
+    owner: root
+    group: root
+  tags: 
+  - pg
+
+- name: Create a symbolic link for postgresql data path
+  file:
+    src: /data/postgresql
+    dest: /var/lib/postgresql
+    owner: root
+    group: root
+    state: link
+  tags:
+  - pg
+
+- name: Create docker data path
+  file:
+    path: /data/docker
+    state: directory
+    mode: '0711'
+    owner: root
+    group: root
+  tags: 
+  - docker
+
+- name: Create a symbolic link for docker data path
+  file:
+    src: /data/docker
+    dest: /var/lib/docker
+    owner: root
+    group: root
+    state: link
+  tags:
+  - docker
+
+# - name: Create zkswap-server-v2 path
+#   file:
+#     path: /data/zkswap-server-v2
+#     state: directory
+#     mode: '0755'
+#     owner: ps
+#     group: ps
+#   tags: 
+#   - go
+
+# - name: Create a symbolic link for zkswap-server-v2
+#   become: yes
+#   become_user: ps
+#   file:
+#     src: /data/zkswap-server-v2
+#     dest: /home/ps/zkswap-server-v2
+#     owner: ps
+#     group: ps
+#     state: link
+#   tags:
+#   - go
+
+
+
+# - name: Create a symbolic link for zkswap-v2
+#   file:
+#     src: /file/to/link/to
+#     dest: /path/to/symlink
+#     owner: foo
+#     group: foo
+#     state: link
+

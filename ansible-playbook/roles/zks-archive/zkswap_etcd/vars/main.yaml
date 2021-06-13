@@ -1,0 +1,9 @@
+---
+DOWNLOAD_URL: https://storage.googleapis.com/etcd
+ETCD_VER: v3.4.16
+ETCD_HOSTS: ['172.26.20.31','172.26.20.32','172.26.20.33']
+TMP_NODES: "{% for h in ETCD_HOSTS %}etcd-{{ h }}=http://{{ h }}:2380,{% endfor %}"
+ETCD_NODES: "{{ TMP_NODES.rstrip(',') }}"
+CLUSTER_STATE: "new"
+ETCD_DATA_DIR: /var/lib/etcd/data
+ETCD_WAL_DIR: /var/lib/etcd/wal

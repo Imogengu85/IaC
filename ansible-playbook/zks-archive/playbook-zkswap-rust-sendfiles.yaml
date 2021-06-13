@@ -1,0 +1,5 @@
+- hosts: n103
+  become: yes
+  remote_user: root
+  roles: 
+    - zkswap_rust_sendfiles 

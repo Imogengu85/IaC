@@ -1,0 +1,4 @@
+- hosts: 64router
+  remote_user: root
+  roles: 
+    - fixdhcpd

@@ -1,0 +1,13 @@
+- name: Print server's CPU / MEMORY / STORAGE / GPU information
+  debug:
+    msg: 
+      - "System {{ ansible_hostname }} with IP {{ ansible_default_ipv4.address }} 's information :"
+      - "Total CPU Cores :     {{ ansible_processor_cores }}"
+      - "Total CPU count :     {{ ansible_processor_count }}"
+      - "Total MEMORY    :     {{ ansible_memtotal_mb // 1024 }} GB"
+      # - "Total STORAGE 1 :     {{ ansible_mounts[0].size_total // 1073741824 }} GB"
+      # - "      AVAILABLE :     {{ ansible_mounts[0].size_available * 100 // ansible_mounts[0].size_total }} %"
+      # - "Total STORAGE 2 :     {{ ansible_mounts[1].size_total // 1073741824 }} GB"
+      # - "      AVAILABLE :     {{ ansible_mounts[1].size_available * 100 // ansible_mounts[1].size_total }} %"
+      - "Total STORAGE 1 :     {{ ansible_devices.nvme0n1.size }} "
+      - "Total STORAGE 2 :     {{ ansible_devices.nvme1n1.size }} "

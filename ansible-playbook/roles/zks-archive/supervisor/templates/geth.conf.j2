@@ -1,0 +1,16 @@
+[program:geth]
+directory=/data/geth-linux-amd64-1.10.1-c2d2f4ed
+command=/data/geth-linux-amd64-1.10.1-c2d2f4ed/geth --syncmode=full  --cache={{ MEMSET }} --{{ ETHMODE }} --datadir=/data/geth  --http --http.port 10331 --http.addr localhost --http.api personal,eth,net,web3 --http.corsdomain '*' --http.vhosts '*' --rpc.txfeecap=0 --txpool.globalslots 200000 --txpool.globalqueue 20000 --txpool.lifetime 24h
+autostart=true
+startsecs=10
+autorestart=true
+startretries=3
+user=root
+priority=999
+stopsignal=INT
+redirect_stderr=true
+stdout_logfile_maxbytes=200MB
+stdout_logfile_backups = 10
+stdout_logfile=/data/geth-linux-amd64-1.10.1-c2d2f4ed/geth.out
+stopasgroup=false
+killasgroup=false

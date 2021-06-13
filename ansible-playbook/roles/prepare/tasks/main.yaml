@@ -1,0 +1,31 @@
+- name: create cocafe user
+  user:
+    name: cocafe
+    groups: adm,sudo
+    shell: /bin/bash
+    append: yes
+    password: "{{ cocafe_password }}"
+
+- name: create .ssh path for user cocafe
+  file:
+    name: /home/cocafe/.ssh
+    state: directory
+    owner: cocafe
+    group: cocafe
+    mode: 0700
+
+- name: upload admin 's ssh_pub_key to user cocafe
+  copy:
+    src: authorized_keys
+    dest: /home/cocafe/.ssh/authorized_keys
+    owner: cocafe
+    group: cocafe
+    mode: 0600
+
+- name: upload sudoers
+  copy:
+    src: files/01-cocafe
+    dest: '/etc/sudoers.d/01-cocafe'
+    owner: root
+    group: root
+    mode: 0440

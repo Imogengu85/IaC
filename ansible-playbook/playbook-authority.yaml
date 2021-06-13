@@ -1,0 +1,6 @@
+- hosts: v2-ljs
+  remote_user: root
+  vars:
+    - available_users: ["liangjisheng","alex1","alex2","maogongyin","zhaoyuanming","henry","baiqiang1","baiqiang2"]
+  roles: 
+    - authority
