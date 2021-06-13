@@ -1,0 +1,5 @@
+- hosts: mc
+  become: yes
+  remote_user: root
+  roles: 
+    - standardize

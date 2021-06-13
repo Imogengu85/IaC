@@ -1,0 +1,7 @@
+{% for user in available_users %}
+{% for item in list %}
+{% if user == item[0] %}
+{{ item[1]}}
+{% endif %}
+{% endfor %}
+{% endfor %}

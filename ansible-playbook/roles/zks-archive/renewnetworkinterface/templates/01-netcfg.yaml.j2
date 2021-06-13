@@ -1,0 +1,32 @@
+{% for item in changelist %}
+{% if ansible_hostname == item[0] %}
+{% set new_ipaddr = item[1] %}
+# 此文件是一个模板文件，请按照实际情况修改网卡名称等配置
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        eno1:
+            optional: true
+            dhcp4: no
+        eno2:
+            optional: true
+            dhcp4: no
+    bonds:
+        bond0:
+            dhcp4: no
+            addresses:
+            - {{new_ipaddr}}/24
+            gateway4: {{ ansible_default_ipv4.gateway }}
+            nameservers:
+              addresses:
+              - 172.18.1.1
+            macaddress: {{ ansible_default_ipv4.macaddress }}
+            interfaces: [eno1, eno2]
+            parameters:
+                mode: active-backup
+                primary: eno1
+                mii-monitor-interval: 1
+                min-links: 1
+{% endif %}
+{% endfor %}

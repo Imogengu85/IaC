@@ -1,0 +1,7 @@
+---
+postgres_repl_user: repl
+postgres_server_port: 5432
+master_server_ip: 172.26.20.81
+standby_server_ip: 172.26.20.82
+postgres_repl_password: RepL2pl0nk!sNaRk
+standby_server_data_dir: /var/lib/postgresql/10/data

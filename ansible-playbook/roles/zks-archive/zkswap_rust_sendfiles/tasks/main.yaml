@@ -1,0 +1,15 @@
+- name: create zkswap-v2
+  file:
+    path: /home/ps/zkswap-v2
+    owner: ps
+    group: ps
+    state: directory
+    mode: '0755'
+
+- name: Get Keys from rust server
+  become: yes
+  become_user: ps
+  synchronize:
+    src: /home/ps/zkswap-v2/keys
+    dest: /home/ps/zkswap-v2/keys
+  delegate_to: 172.20.101.101

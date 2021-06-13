@@ -1,0 +1,4 @@
+- hosts: ethmain
+  remote_user: root
+  roles: 
+    - sysstat

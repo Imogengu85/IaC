@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name memories.cocafe.co;
+	root /var/galleries;
+     	location ~ {
+		index index.html;
+		root /var/galleries_web;
+	}
+}

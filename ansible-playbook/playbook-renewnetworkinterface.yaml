@@ -1,0 +1,5 @@
+- hosts: sim-t
+  become: yes
+  remote_user: root
+  roles: 
+    - renewnetworkinterface

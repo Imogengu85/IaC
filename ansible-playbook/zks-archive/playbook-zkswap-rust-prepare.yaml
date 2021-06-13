@@ -1,0 +1,6 @@
+- hosts: "604175"
+  become: yes
+  remote_user: root
+  roles: 
+    - zkswap_rust_server
+   # - zkswap_rust_docker

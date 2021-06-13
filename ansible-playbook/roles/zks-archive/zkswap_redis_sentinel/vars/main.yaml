@@ -1,0 +1,4 @@
+---
+master_ip: 172.26.20.31
+redis_port: 6379
+requirepass_secret: "Zks100$2daMo0n"

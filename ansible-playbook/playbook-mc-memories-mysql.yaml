@@ -1,0 +1,6 @@
+- hosts: mc
+  become: yes
+  remote_user: root
+  gather_facts: False
+  roles: 
+    - mcmemories-mysql

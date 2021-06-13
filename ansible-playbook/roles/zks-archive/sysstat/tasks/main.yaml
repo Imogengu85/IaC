@@ -1,0 +1,15 @@
+- name: apt sysstat
+  apt: name=sysstat state=present
+
+- name: update config
+  lineinfile:
+    path: "/etc/default/sysstat"
+    regexp: 'ENABLED='
+    line: 'ENABLED="true"'
+    
+- name: restart service
+  service:
+    name: sysstat
+    state: restarted
+    sleep: 1
+    enabled: yes

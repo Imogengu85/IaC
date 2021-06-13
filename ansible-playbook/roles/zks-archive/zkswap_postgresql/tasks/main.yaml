@@ -1,0 +1,246 @@
+- name: apt postgresql
+  apt:
+    name: 'postgresql'
+    update_cache: true
+    state: present
+    policy_rc_d: 101
+
+- name: configure accessing permission
+  become: yes
+  become_user: postgres
+  lineinfile:
+    line:  "host  all   postgres {{ansible_default_ipv4.network}}/24  trust"
+    path:  /etc/postgresql/10/main/pg_hba.conf
+    
+- name: configure repl local permission [only on master]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    line:  "host  replication  {{postgres_repl_user}} {{master_server_ip}}/32   md5"
+    path:  /etc/postgresql/10/main/pg_hba.conf
+  when: master==1
+
+- name: configure repl remote permission [only on master]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    line: "host    replication   {{postgres_repl_user}}   {{standby_server_ip}}/32      md5"
+    path: /etc/postgresql/10/main/pg_hba.conf
+  when: master==1
+
+- name: configure logging on
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^logging_collector'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#logging_collector'
+    line:  logging_collector = on
+
+- name: configure pgsql to listen on any interface
+  become: yes
+  become_user: postgres
+  lineinfile:
+    line:  listen_addresses = '*'
+    regexp: '^listen_addresses'
+    path:  /etc/postgresql/10/main/postgresql.conf
+
+- name: configure max_connections to 1000
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^max_connections'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#max_connections'
+    line:  'max_connections = 1000'
+
+- name: configure wal_level to replica [only on master]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^wal_level'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#wal_level'
+    line:  'wal_level = replica'
+  when: master==1
+
+- name: configure max_wal_senders to 20 [only on master]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^max_wal_senders'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#max_wal_senders'
+    line:  'max_wal_senders = 20'
+  when: master==1
+
+- name: configure min_wal_size to 800MB [only on master]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^min_wal_size'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#min_wal_size'
+    line:  'min_wal_size = 800MB'
+  when: master==1
+
+
+- name: configure wal_level to hot_standby [only on standby]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^wal_level'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#wal_level'
+    line:  'wal_level = hot_standby'
+  when: master!=1
+
+- name: configure hot_standby to on [only on standby]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^hot_standby'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#hot_standby'
+    line:  'hot_standby = on'
+  when: master!=1
+
+- name: configure max_standby_streaming_delay to 30s [only on standby]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^max_standby_streaming_delay '
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#max_standby_streaming_delay '
+    line:  'max_standby_streaming_delay = 30s'
+  when: master!=1
+
+- name: configure wal_receiver_status_interval to 10s [only on standby]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^wal_receiver_status_interval'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#wal_receiver_status_interval'
+    line:  'wal_receiver_status_interval = 10s'
+  when: master!=1
+
+- name: configure hot_standby_feedback to on [only on standby]
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^hot_standby_feedback'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    insertafter: '^#hot_standby_feedback'
+    line:  'hot_standby_feedback = on'
+  when: master!=1
+
+- name: start postgresql master
+  systemd:
+    name: postgresql
+    state: restarted
+    daemon-reload: yes
+  when: master==1
+
+- name: check if repl user is existed
+  become: yes
+  become_user: postgres
+  shell: psql -U postgres postgres -c "select rolname,rolsuper,rolcanlogin from pg_roles where rolname='repl';" | grep repl
+  register: checkuser
+  when: master==1
+  ignore_errors: yes
+
+- name: create repl user if it hasn't been created
+  become: yes
+  become_user: postgres
+  shell: psql -U postgres postgres -c "CREATE ROLE  {{postgres_repl_user}} login replication encrypted password '{{postgres_repl_password}}';"
+  when: master==1 and checkuser.rc!=0
+
+- name: make directory for standby server
+  file:
+    state: directory
+    recurse: yes
+    path: "{{standby_server_data_dir}}"
+    owner: postgres
+    group: postgres
+    mode: 0700
+  when: master!=1
+
+- name: generate .pgpass for standby server
+  become: yes
+  become_user: postgres
+  template:
+    src: pgpass.j2
+    dest: $HOME/.pgpass
+    owner: postgres
+    group: postgres
+    mode: 0600
+  when: master!=1
+
+- name: check if the standby server already initialed
+  become: yes
+  become_user: postgres
+  shell: "[ -e {{standby_server_data_dir}}/postgresql.auto.conf ]"
+  register: checkinit
+  when: master!=1
+  ignore_errors: yes
+
+- name: standby server init
+  become: yes
+  become_user: postgres
+  shell: "pg_basebackup -h {{master_server_ip}} -U {{postgres_repl_user}} -w -F p -P -X stream -R -D {{standby_server_data_dir}}"
+  when: master!=1 and checkinit.rc!=0
+
+- name: update standby server's config -- set datadir
+  become: yes
+  become_user: postgres
+  lineinfile:
+    regexp: '^data_directory'
+    path: /etc/postgresql/10/main/postgresql.conf
+    state: present
+    line:  "data_directory = '/var/lib/postgresql/10/data'"
+  when: master!=1
+
+- name: enable postgres service on standby server
+  systemd:
+    name: postgresql
+    enabled: yes
+  when: master!=1
+
+# - name: start standby postgresql by pg_ctl
+#   become: yes
+#   become_user: postgres
+#   shell: /usr/lib/postgresql/10/bin/pg_ctl -D {{standby_server_data_dir}} -l {{standby_server_data_dir}}/pg_ctl.log start
+#   when: master!=1
+
+- name: start postgresql standby
+  systemd:
+    name: postgresql
+    state: started
+    daemon-reload: yes
+  when: master!=1
+
+- name: get replication status
+  become: yes
+  become_user: postgres
+  shell: psql  -U postgres postgres -c "SELECT client_addr,state,sync_state FROM pg_stat_replication;"
+  register: output
+  when: master==1
+
+- name: show replication status
+  debug:
+    var: output.stdout
+  when: master==1
+
+
+

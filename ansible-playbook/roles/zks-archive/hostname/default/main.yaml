@@ -1,0 +1,26 @@
+- name: apt sysstat
+  apt: name=sysstat state=present
+
+- name: update config enable sysstat cron
+  lineinfile:
+    path: "/etc/default/sysstat"
+    regexp: '^ENABLED="false"'
+    line: 'ENABLED="true"'
+    
+- name: update config history files
+  lineinfile:
+    path: "/etc/default/sysstat"
+    regexp: 'HISTORY='
+    line: 'HISTORY=7'
+
+- name: 
+
+- name: restart service
+  service:
+    name: sysstat
+    state: restarted
+    sleep: 1
+    enabled: yes
+
+
+

@@ -1,0 +1,5 @@
+- hosts: v2-test
+  become: yes
+  remote_user: root
+  roles: 
+    - hostname
