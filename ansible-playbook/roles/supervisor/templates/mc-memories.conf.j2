@@ -1,0 +1,16 @@
+[program:mcmemories]
+directory=/home/cocafe/mc-uploadimg-server/build
+command=/home/cocafe/mc-uploadimg-server/build/mc-uploadimg-server
+autostart=true
+startsecs=10
+autorestart=true
+startretries=3
+user=cocafe
+priority=999
+stopsignal=INT
+redirect_stderr=true
+stdout_logfile_maxbytes=200MB
+stdout_logfile_backups = 10
+stdout_logfile=/home/cocafe/mc-uploadimg-server/build/mc-uploadimg-server.out
+stopasgroup=false
+killasgroup=false

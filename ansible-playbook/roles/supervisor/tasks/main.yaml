@@ -1,0 +1,81 @@
+- name: apt python3-pip
+  apt: 
+    name: python3-pip 
+    state: present
+
+- name: pip supervisor
+  pip:
+    name: supervisor
+    state: present
+
+- name: make directory for supervisord
+  file:
+    path: "/etc/supervisord.d"
+    state: directory
+    mode: 0755
+
+- name: judge config file is exist
+  shell: ls /etc/supervisord.conf
+  ignore_errors: True
+  register: rst
+
+# - name: display rst
+#   debug:
+#     var: rst
+
+- name: generate config file
+  shell: echo_supervisord_conf > /etc/supervisord.conf
+  when: rst.failed
+
+- name: update supervisor config chmod
+  lineinfile:
+    path: "/etc/supervisord.conf"
+    regexp: ';chmod=0700'
+    line: 'chmod=0766'
+    backrefs: yes
+
+- name: update supervisor config include1
+  lineinfile:
+    path: "/etc/supervisord.conf"
+    regexp: ';\[include\]'
+    line: '[include]'
+    backrefs: yes
+
+- name: update supervisor config include2
+  lineinfile:
+    path: "/etc/supervisord.conf"
+    regexp: ';files ='
+    line: 'files = /etc/supervisord.d/*.conf'
+    backrefs: yes
+
+- name: update template
+  template: 
+    src: mc-memories.conf.j2
+    dest: /etc/supervisord.d/mc-memories.conf
+    mode: 0755
+  register: template_update
+
+- name: check service
+  shell: ps -ef | grep supervisord | grep -v 'grep'
+  register: live
+  ignore_errors: True
+
+# - name: display live
+#   debug:
+#     var: live
+
+- name: kill service
+  shell: killall supervisord
+  when: 
+    - live.failed == false
+    - template_update.changed
+  register: iskilled
+
+- name: check service
+  shell: ps -ef | grep supervisord | grep -v 'grep'
+  register: live2
+  ignore_errors: True
+
+- name: start service
+  shell: supervisord -c /etc/supervisord.conf
+  when: live2.failed

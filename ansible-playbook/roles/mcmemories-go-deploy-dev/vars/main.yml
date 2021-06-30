@@ -1,0 +1,4 @@
+---
+service_port:  61668
+service_src_path: /home/cocafe/mc-uploadimg-server
+service_build_path: /home/cocafe/mc-uploadimg-server/build

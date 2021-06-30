@@ -1,49 +1,78 @@
-- name: apt install nginx
-  apt:
-    name: nginx
-    update_cache: true
-    state: present
+# - name: apt install nginx
+#   apt:
+#     name: nginx
+#     update_cache: true
+#     state: present
 
-- name: unarchive galleries test file to /var/
-  unarchive:
-    src: galleries_web.tar.gz
-    dest: /var/
-    owner: root
-    group: root
-    mode: 0755
+# - name: unarchive galleries test file to /var/
+#   unarchive:
+#     src: galleries_web.tar.gz
+#     dest: /var/
+#     owner: root
+#     group: root
+#     mode: 0755
 
-- name: update website's nginx configuration
-  template:
-    src: mc-memories.j2
-    dest: /etc/nginx/sites-enabled/mc-memories
-    mode: 0755
+# - name: apt install unzip
+#   apt:
+#     name: unzip
 
-- name: restart nginx
-  systemd:
-    name: nginx
-    state: restarted
 
-- name: snap update core
-  community.general.snap:
-    name: core
-    state: present
+# - name: remove cocafe-output
+#   file:
+#     path: /var/cocafe-output
+#     state: absent
 
-- name: apt remove certbot
-  apt:
-    name: certbot
-    state: absent
+# - name: unarchive mc-memories file to /var/
+#   unarchive:
+#     src: cocafe-output.zip
+#     dest: /var/
+#     owner: root
+#     group: root
+    # mode: 0755
 
-- name: snap install certbot
-  community.general.snap:
-    name: certbot
-    classic: yes
-    state: present
+# - name: upload policy.html to /var/cocafe-output/mobile/cocafe
+#   copy:
+#     src: policy.html
+#     dest: /var/cocafe-output/mobile/cocafe/
+#     owner: root
+#     group: root
+#     mode: 0755
 
-- name: create a /usr/bin/ symbol link for certbot
-  file:
-    src: /snap/bin/certbot
-    dest: /usr/bin/certbot
-    state: link
+# - name: cp index.html to root
+#   shell: cp /var/cocafe-output/mobile/cocafe/index.html  /var/cocafe-output/index.html
+
+# - name: update website's nginx configuration
+#   template:
+#     src: mc-memories.j2
+#     dest: /etc/nginx/sites-enabled/mc-memories
+#     mode: 0755
+
+# - name: restart nginx
+#   systemd:
+#     name: nginx
+#     state: restarted
+
+# - name: snap update core
+#   community.general.snap:
+#     name: core
+#     state: present
+
+# - name: apt remove certbot
+#   apt:
+#     name: certbot
+#     state: absent
+
+# - name: snap install certbot
+#   community.general.snap:
+#     name: certbot
+#     classic: yes
+#     state: present
+
+# - name: create a /usr/bin/ symbol link for certbot
+#   file:
+#     src: /snap/bin/certbot
+#     dest: /usr/bin/certbot
+#     state: link
 
 # 需要交互完成
 # - name: generate certification due to  nginx configuration

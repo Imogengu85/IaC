@@ -1,2 +1,10 @@
 [mc]
 mcmemories-1 ansible_ssh_host=47.241.178.221 ansible_ssh_user=cocafe
+
+[mc-prd]
+mc-memories ansible_ssh_host=47.57.70.0 ansible_ssh_user=cocafe
+mc-bastion ansible_ssh_host=47.243.157.5 ansible_ssh_user=cocafe
+
+[mc-prd-memories]
+mc-memories
+

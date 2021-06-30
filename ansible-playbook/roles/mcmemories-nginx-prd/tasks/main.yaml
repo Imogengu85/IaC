@@ -1,0 +1,64 @@
+# - name: apt install nginx & zip
+#   apt:
+#     name: 
+#     - nginx
+#     - zip
+#     update_cache: true
+
+- name: remove cocafe-output
+  file:
+    path: /var/cocafe-output
+    state: absent
+
+- name: unarchive mc-memories file to /var/
+  unarchive:
+    src: cocafe-output.zip
+    dest: /var/
+    owner: root
+    group: root
+    mode: 0755
+
+- name: cp index.html to root
+  shell: cp /var/cocafe-output/mobile/cocafe/index.html  /var/cocafe-output/index.html
+
+# - name: update website's nginx configuration
+#   template:
+#     src: mc-memories.j2
+#     dest: /etc/nginx/sites-enabled/mc-memories
+#     mode: 0755
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+
+# - name: snap update core
+#   community.general.snap:
+#     name: core
+#     state: present
+
+# - name: apt remove certbot
+#   apt:
+#     name: certbot
+#     state: absent
+
+# - name: snap install certbot
+#   community.general.snap:
+#     name: certbot
+#     classic: yes
+#     state: present
+
+# - name: create a /usr/bin/ symbol link for certbot
+#   file:
+#     src: /snap/bin/certbot
+#     dest: /usr/bin/certbot
+#     state: link
+
+# 需要交互完成
+# - name: generate certification due to  nginx configuration
+#   shell: 'certbot --nginx'
+#   register: certout
+
+# - name: show certbot's output
+#   debug:
+#     vars: certout.stdout

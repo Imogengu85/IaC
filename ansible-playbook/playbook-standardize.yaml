@@ -1,4 +1,4 @@
-- hosts: mc
+- hosts: mc-prd
   become: yes
   remote_user: root
   roles: 

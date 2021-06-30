@@ -1,0 +1,39 @@
+# - name: git pull mc-uploadimg-server
+#   become: yes
+#   become_user: cocafe
+#   git:
+#     repo: 'git@github.com:cocafe-labs/mc-uploadimg-server.git'
+#     dest: "{{ service_src_path }}"
+#     version: HEAD
+
+- name: check supervisord service
+  shell: ps -ef | grep supervisord | grep -v 'grep'
+  register: live
+  ignore_errors: True
+
+- name: kill service
+  shell: killall supervisord
+  when: 
+    - live.failed == false
+  register: iskilled
+
+- name: Waits for port {{service_port}} to close active connections, don't start checking for 3 seconds
+  wait_for:
+    host: 0.0.0.0
+    port: "{{ service_port }}"
+    delay: 3
+    state: drained
+
+- name: build service
+  become: yes
+  become_user: cocafe
+  shell: "cd {{ service_src_path }} && /usr/local/go/bin/go build -o {{ service_build_path }}"
+
+- name: check service
+  shell: ps -ef | grep supervisord | grep -v 'grep'
+  register: live2
+  ignore_errors: True
+
+- name: start service
+  shell: supervisord -c /etc/supervisord.conf
+  when: live2.failed

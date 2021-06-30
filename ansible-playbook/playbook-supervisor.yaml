@@ -1,7 +1,5 @@
-- hosts: ethrop
+- hosts: mc-prd-memories
+  become: yes
   remote_user: root
-  vars:
-    ETHMODE: ropsten
-    MEMSET: 4096
   roles: 
     - supervisor
