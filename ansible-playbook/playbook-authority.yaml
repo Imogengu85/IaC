@@ -1,3 +1,3 @@
-- hosts: mainpage
+- hosts: mcd-t1
   roles: 
     - authority
