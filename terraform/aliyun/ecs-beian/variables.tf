@@ -10,6 +10,9 @@ variable "image_id" {
   default = "ubuntu_20_04_x64_20G_alibase_20210521.vhd"
 }
 
+variable "disk_size"{
+  default = 20
+}
 variable "role" {
   default = "server"
 }
@@ -23,7 +26,7 @@ variable "short_name" {
 }
 
 variable "ecs_type" {
-  default = "ecs.g6.xlarge"
+  default = "ecs.t5-lc1m2.small"
 }
 
 variable "internet_charge_type" {
@@ -31,7 +34,7 @@ variable "internet_charge_type" {
 }
 
 variable "instance_charge_type" {
-  default = "PostPaid"
+  default = "PayAsYouGo"
 }
 
 variable "internet_max_bandwidth_out" {

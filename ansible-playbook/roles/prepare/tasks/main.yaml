@@ -1,7 +1,9 @@
 - name: create cocafe user
   user:
     name: cocafe
-    groups: adm,sudo
+    groups: 
+    - adm
+    - sudo
     shell: /bin/bash
     append: yes
     password: "{{ cocafe_password }}"

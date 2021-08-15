@@ -26,6 +26,10 @@ variable "ecs_type" {
   default = "ecs.g6.xlarge"
 }
 
+variable "vpc_id" {
+  default = "vpc-j6coayldzadf1o29s2e4u"
+}
+
 variable "internet_charge_type" {
   default = "PayByTraffic"
 }

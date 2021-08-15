@@ -1,0 +1,3 @@
+---
+server_domain_name: demo.cocafe.co
+web_path: "/var/cocafeHome-output"

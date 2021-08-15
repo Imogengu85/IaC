@@ -1,4 +1,4 @@
-- hosts: mc-prd
+- hosts: mainpage
   become: yes
   remote_user: root
   roles: 

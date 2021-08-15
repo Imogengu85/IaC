@@ -1,13 +1,13 @@
 data "alicloud_instance_types" "instance_type" {
-  instance_type_family = "ecs.g6"
-  cpu_core_count       = "4"
-  memory_size          = "16"
+  instance_type_family = "ecs.t5"
+  cpu_core_count       = "1"
+  memory_size          = "2"
 }
 
 resource "alicloud_security_group" "group" {
   name        = var.short_name
   description = "New security group"
-  vpc_id      = var.vpc_id
+  vpc_id      = alicloud_vpc.vpc.id
 }
 
 resource "alicloud_security_group_rule" "allow_http_22" {
@@ -16,28 +16,6 @@ resource "alicloud_security_group_rule" "allow_http_22" {
   nic_type          = var.nic_type
   policy            = "accept"
   port_range        = "22/22"
-  priority          = 1
-  security_group_id = alicloud_security_group.group.id
-  cidr_ip           = "0.0.0.0/0"
-}
-
-resource "alicloud_security_group_rule" "allow_http_80" {
-  type              = "ingress"
-  ip_protocol       = "tcp"
-  nic_type          = var.nic_type
-  policy            = "accept"
-  port_range        = "80/80"
-  priority          = 1
-  security_group_id = alicloud_security_group.group.id
-  cidr_ip           = "0.0.0.0/0"
-}
-
-resource "alicloud_security_group_rule" "allow_https_443" {
-  type              = "ingress"
-  ip_protocol       = "tcp"
-  nic_type          = var.nic_type
-  policy            = "accept"
-  port_range        = "443/443"
   priority          = 1
   security_group_id = alicloud_security_group.group.id
   cidr_ip           = "0.0.0.0/0"
@@ -58,10 +36,10 @@ resource "alicloud_vswitch" "vswitch" {
 }
 
 resource "alicloud_eip" "eip-cocafe" {
-  name                 = var.eip_name
+  address_name         = var.eip_name
   bandwidth            = var.internet_max_bandwidth_out
   internet_charge_type = var.internet_charge_type
-  instance_charge_type = var.instance_charge_type
+  payment_type = var.instance_charge_type
 }
 
 resource "alicloud_instance" "instance" {
@@ -76,7 +54,7 @@ resource "alicloud_instance" "instance" {
   password = var.ecs_password
 
   system_disk_category          = "cloud_efficiency"
-  system_disk_size              = 20
+  system_disk_size              = var.disk_size
   system_disk_name              = "${var.short_name}-${var.role}-${format(var.count_format, count.index + 1)}-system-disk"
   system_disk_description       = "${var.short_name}-${var.role}-${format(var.count_format, count.index + 1)}-system-disk-description"
   security_enhancement_strategy = "Deactive"
