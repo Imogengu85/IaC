@@ -2,4 +2,4 @@
   become: yes
   remote_user: root
   roles: 
-    - standardize
+    - mcd-test-docker

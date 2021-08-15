@@ -11,7 +11,7 @@
     dest: '/etc/security/limits.conf'
     owner: root
     group: root
-    mode: 0644  
+    mode: 0644
 
 - name: flash limit arg
   shell: "ulimit -SHn 65536"
@@ -21,8 +21,8 @@
     name: 
       - 'git'
       - 'tree'
-      # - 'nodejs'
-      # - 'npm'
+      - 'nodejs'
+      - 'npm'
       - 'axel'
       - 'gettext'
       - 'jq'
@@ -39,11 +39,19 @@
     update_cache: true
     state: present
 
-- name: get go
-  shell: "wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz"
+- name: send go
+  copy: 
+    src: files/go1.16.7.linux-amd64.tar.gz
+    dest: '/root/go1.16.7.linux-amd64.tar.gz'
+    owner: root
+    group: root
+    mode: 0644
+
+# - name: get go
+#   shell: "wget https://golang.org/dl/go1.16.4.linux-amd64.tar.gz"
 
 - name: install go
-  shell: "rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.4.linux-amd64.tar.gz"
+  shell: "rm -rf /usr/local/go && tar -C /usr/local -xzf /root/go1.16.7.linux-amd64.tar.gz"
 
 - name: add go path
   become: yes
