@@ -49,14 +49,14 @@
 #     state: present
 #     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-# - name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
-#   community.mysql.mysql_user:
-#     name: "{{mysql_user_name}}"
-#     password: "{{mysql_user_password}}"
-#     host: localhost
-#     priv: '{{mysql_database_name}}.*:ALL,GRANT'
-#     state: present
-#     login_unix_socket: /var/run/mysqld/mysqld.sock
+- name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    host: localhost
+    priv: '{{mysql_database_name}}.*:ALL,GRANT'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
 
 # - name: Create table staff
 #   community.mysql.mysql_query:
