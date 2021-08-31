@@ -54,6 +54,28 @@ resource "alicloud_security_group_rule" "allow_tcp_5001" {
   cidr_ip           = "0.0.0.0/0"
 }
 
+resource "alicloud_security_group_rule" "allow_tcp_80" {
+  type              = "ingress"
+  ip_protocol       = "tcp"
+  nic_type          = var.nic_type
+  policy            = "accept"
+  port_range        = "80/80"
+  priority          = 1
+  security_group_id = alicloud_security_group.group.id
+  cidr_ip           = "0.0.0.0/0"
+}
+
+resource "alicloud_security_group_rule" "allow_tcp_443" {
+  type              = "ingress"
+  ip_protocol       = "tcp"
+  nic_type          = var.nic_type
+  policy            = "accept"
+  port_range        = "443/443"
+  priority          = 1
+  security_group_id = alicloud_security_group.group.id
+  cidr_ip           = "0.0.0.0/0"
+}
+
 data "alicloud_zones" "zones_ds" {
   available_instance_type = data.alicloud_instance_types.instance_type.instance_types[0].id
 }
