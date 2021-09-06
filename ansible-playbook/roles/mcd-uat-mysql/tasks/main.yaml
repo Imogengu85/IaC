@@ -1,0 +1,82 @@
+- name: apt install mysql,pip3,other dependancy
+  apt:
+    name: 
+      - mysql-server
+      - python3-pip
+      - python3-dev
+      - default-libmysqlclient-dev
+      - build-essential
+    update_cache: true
+    state: present
+
+- name: pip install PyMySQL
+  pip:
+    name: 
+      - PyMySQL
+
+- name: set mysql binding address to *
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^bind-address'
+    line: 'bind-address  = *'
+    state: present
+
+- name: set mysql configure log_bin [only on master]
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^log_bin'
+    insertafter: '^#log_bin'
+    line: 'log_bin			= /var/log/mysql/master-bin.log'
+    state: present
+
+- name: set mysql server_id
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^server-id'
+    insertafter: '^#server-id'
+    line: 'server-id		= 1'
+    state: present
+
+- name: restart mysql server
+  systemd:
+    name: mysql
+    state: restarted
+    daemon-reload: yes
+
+- name: create database {{mysql_database_name}}
+  community.mysql.mysql_db:
+    name: "{{mysql_database_name}}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    host: localhost
+    priv: '{{mysql_database_name}}.*:ALL,GRANT'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+# - name: Create table staff
+#   community.mysql.mysql_query:
+#     login_db: "{{ mysql_database_name }}"
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+#     query: CREATE TABLE `staff` (`id` int NOT NULL AUTO_INCREMENT,`staff_id` varchar(300) NOT NULL,`name` char(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,`phone` char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,`email` varchar(200) NOT NULL,`dept` varchar(200) DEFAULT NULL,`image_url` varchar(400) NOT NULL DEFAULT '',`memories` text,`update_time` datetime DEFAULT NULL,PRIMARY KEY (`id`),UNIQUE KEY `staff_id` (`staff_id`),UNIQUE KEY `phone` (`phone`),KEY `idx_name` (`staff_id`,`name`)) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+# - name: truncate table staff
+#   community.mysql.mysql_query:
+#     login_db: "{{ mysql_database_name }}"
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+#     query: TRUNCATE TABLE `staff`
+
+
+# - name: Create app user {{mysql_user_name}} and privileges @% and 'WITH GRANT OPTION'
+#   community.mysql.mysql_user:
+#     name: "{{mysql_user_name}}"
+#     password: "{{mysql_user_password}}"
+#     host: '%'
+#     priv: '{{mysql_database_name}}.*:ALL,GRANT'
+#     state: present
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+

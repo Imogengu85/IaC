@@ -1,3 +1,3 @@
-- hosts: mcd-t1
+- hosts: mcd-uat
   roles: 
     - authority

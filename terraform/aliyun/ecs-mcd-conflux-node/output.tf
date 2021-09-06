@@ -23,5 +23,5 @@ output "vswitch_id" {
 }
 
 output "security_group_id" {
-  value = alicloud_instance.instance.0.security_groups
+  value = alicloud_security_group.group.id
 }

@@ -1,5 +1,5 @@
-- hosts: mcd-uat
+- hosts: mcd-u1
   become: yes
   remote_user: root
   roles: 
-    - standardize
+    - mcd-uat-docker

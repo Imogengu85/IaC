@@ -1,6 +1,9 @@
 [mcd-test]
-mcd-t1 ansible_ssh_host=mcd-t1.s.cocafe.co ansible_ssh_user=root ansible_ssh_pass=Nftfanatic10@$
+mcd-t1 ansible_ssh_host=mcd-t1.s.cocafe.co ansible_ssh_user=cocafe
 
+[mcd-uat]
+mcd-u1 ansible_ssh_host=mcd-u1.s.cocafe.co ansible_ssh_user=cocafe
+cfx-m1 ansible_ssh_host=cfx-m1.s.cocafe.co ansible_ssh_user=cocafe
 
 [mc]
 mcmemories-1 ansible_ssh_host=47.241.178.221 ansible_ssh_user=cocafe

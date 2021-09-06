@@ -1,0 +1,55 @@
+- name: get docker apt source
+  shell:  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+- name: add fingerprint
+  become: yes
+  shell: apt-key fingerprint 0EBFCD88
+
+- name: add apt repo
+  become: yes
+  shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" 
+
+- name: apt docker-ce
+  apt:
+    name: 
+      - 'docker-ce'
+      - 'docker-ce-cli'
+      - 'containerd.io'
+      - 'docker-compose'
+    update_cache: true
+    state: present
+
+- name: get docker version
+  shell: docker -v
+  register: dockerv
+
+- name: show docker version
+  debug:
+    msg: "Docker version is {{dockerv}}"
+
+- name: get docker-compose version
+  shell: docker-compose -v
+  register: dockercomv
+
+- name: show docker-compose version
+  debug:
+    msg: "Docker-compose version is {{dockercomv}}"
+
+- name: start docker
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: docker
+
+- name: add user cocafe to docker group
+  user:
+    name: cocafe
+    groups: 
+      - docker
+    append: yes
+
+- name: restart docker
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: docker
