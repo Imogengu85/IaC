@@ -1,0 +1,99 @@
+- name: apt install nginx
+  apt:
+    name: nginx
+    update_cache: true
+    state: present
+
+- name: npm cache clean
+  shell: npm cache clean -f
+
+- name: npm install n
+  npm:
+    global: yes
+    name: "n"
+    state: present
+
+- name: upgrade nodejs
+  shell: n stable
+
+- name: get node version
+  shell: node -v
+  register: nodev
+
+- name: show node version
+  debug:
+    msg: "node version is {{nodev.stdout}}"
+
+- name: get npm version
+  shell: npm -v
+  register: npmv
+
+- name: show npm version
+  debug:
+    msg: "npm version is {{npmv.stdout}}"
+
+- name: Read-write git checkout from github
+  become: yes
+  become_user: cocafe
+  ansible.builtin.git:
+    repo: git@github.com:cocafe-labs/cocafe-website.git
+    dest: "{{ base_path }}"
+    force: yes
+    
+- name: remove build
+  file:
+    path: "{{ base_path }}/out"
+    state: absent
+
+- name: Install packages based on package.json.
+  community.general.npm:
+    path: "{{ base_path }}"
+
+# - name: fix CAPS!
+#   shell: mv {{ base_path }}/styles/Home.module.css {{ base_path }}/styles/home.module.css
+
+- name: npm run build
+  become: yes
+  become_user: cocafe
+  shell: "cd {{ base_path }} && npm run build"
+
+- name: update website's nginx configuration
+  template:
+    src: mcd-test.j2
+    dest: /etc/nginx/sites-enabled/cocafe-web
+    mode: 0755
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+
+- name: snap update core
+  community.general.snap:
+    name: core
+    state: present
+
+- name: apt remove certbot
+  apt:
+    name: certbot
+    state: absent
+
+- name: snap install certbot
+  community.general.snap:
+    name: certbot
+    classic: yes
+    state: present
+
+- name: create a /usr/bin/ symbol link for certbot
+  file:
+    src: /snap/bin/certbot
+    dest: /usr/bin/certbot
+    state: link
+
+# - name: generate certification due to  nginx configuration
+#   shell: 'certbot --nginx'
+#   register: certout
+
+# - name: show certbot's output
+#   debug:
+#     vars: certout.stdout

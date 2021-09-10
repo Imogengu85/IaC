@@ -19,7 +19,7 @@
     state: present
 
 - name: upgrade nodejs
-  shell: n stable && exit
+  shell: n stable
 
 - name: get node version
   shell: node -v

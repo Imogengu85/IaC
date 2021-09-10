@@ -43,6 +43,17 @@ resource "alicloud_security_group_rule" "allow_tcp_8081" {
   cidr_ip           = "0.0.0.0/0"
 }
 
+resource "alicloud_security_group_rule" "allow_tcp_8834" {
+  type              = "ingress"
+  ip_protocol       = "tcp"
+  nic_type          = var.nic_type
+  policy            = "accept"
+  port_range        = "8834/8834"
+  priority          = 1
+  security_group_id = alicloud_security_group.group.id
+  cidr_ip           = "0.0.0.0/0"
+}
+
 resource "alicloud_security_group_rule" "allow_tcp_5001" {
   type              = "ingress"
   ip_protocol       = "tcp"

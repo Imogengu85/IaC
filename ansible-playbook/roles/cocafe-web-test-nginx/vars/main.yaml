@@ -1,0 +1,5 @@
+---
+service_ip: 127.0.0.1
+service_port: 3000
+server_domain_name: www-t.cocafe.co
+base_path: /var/cocafe-output/cocafe-website/

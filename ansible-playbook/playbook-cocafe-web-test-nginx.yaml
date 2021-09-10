@@ -3,4 +3,4 @@
   remote_user: root
   gather_facts: False
   roles: 
-    - mcd-test-nginx
+    - cocafe-web-test-nginx

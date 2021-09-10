@@ -12,5 +12,6 @@ resource "alicloud_oss_bucket" "bucket-new" {
   redundancy_type = "LRS"
   website {
     index_document = "index.html"
+    error_document = "index.html"
   }
 }
