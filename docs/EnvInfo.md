@@ -2,6 +2,15 @@
 
 [toc]
 
+## cocafe IPFS
+
+### Pinata
+
+- username: nftfanatic@cocafe.co
+- password: "you know it"
+- api-v2 keys: e6U1R67uTS59MJKHutOMq4bEAHzdCtvC
+- gateway: cocafe.mypinata.cloud
+
 ## cocafe aliyun Infra
 
 ### Conflux Node
