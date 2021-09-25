@@ -1,5 +1,5 @@
 ---
-available_users: ["panchen","maogongyin","bastion","wangpeiyu","yuanshanshan","liyizhi"]
+available_users: ["panchen","maogongyin"]
 ssh_authorized_key_path: /home/cocafe/.ssh/authorized_keys
 ssh_user_name: cocafe
 list:
