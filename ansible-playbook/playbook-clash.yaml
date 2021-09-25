@@ -1,0 +1,5 @@
+- hosts: cfx-m1
+  become: yes
+  remote_user: root
+  roles: 
+    - clash

@@ -1,9 +1,16 @@
+[mcd-prd]
+mcd-coVault ansible_ssh_host=mcd-p2.s.cocafe.co ansible_ssh_user=cocafe
+mcd-p1 ansible_ssh_host=mcd-p1.s.cocafe.co ansible_ssh_user=cocafe
+
 [mcd-test]
 mcd-t1 ansible_ssh_host=mcd-t1.s.cocafe.co ansible_ssh_user=cocafe
 
 [mcd-uat]
 mcd-u1 ansible_ssh_host=mcd-u1.s.cocafe.co ansible_ssh_user=cocafe
 cfx-m1 ansible_ssh_host=cfx-m1.s.cocafe.co ansible_ssh_user=cocafe
+
+[pcn-uat]
+pcn-u1 ansible_ssh_host=pcn-u1.s.cocafe.co ansible_ssh_user=cocafe
 
 [mc]
 mcmemories-1 ansible_ssh_host=47.241.178.221 ansible_ssh_user=cocafe
@@ -18,3 +25,13 @@ mc-memories
 [mainpage]
 mainpage-web ansible_ssh_host=8.210.254.249 ansible_ssh_user=cocafe
 
+[trj-prd]
+trj ansible_ssh_host=trj.s.cocafe.co ansible_ssh_user=cocafe
+
+[clash]
+clash-01 ansible_ssh_host=47.241.161.208 ansible_ssh_user=cocafe
+
+[new-svr]
+mcd-coVault
+mcd-p1
+pcn-u1

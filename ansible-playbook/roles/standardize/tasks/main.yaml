@@ -39,6 +39,8 @@
     update_cache: true
     state: present
 
+
+
 - name: send go
   copy: 
     src: files/go1.16.7.linux-amd64.tar.gz
@@ -77,3 +79,11 @@
     regex: '^/swap.img'
     path: /etc/fstab
     state: absent
+
+- name: upload git private key
+  copy:
+    src: cocafe_id_rsa
+    dest: '/home/cocafe/.ssh/id_rsa'
+    owner: cocafe
+    group: cocafe
+    mode: 0400

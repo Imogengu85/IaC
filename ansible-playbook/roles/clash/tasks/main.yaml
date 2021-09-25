@@ -1,0 +1,126 @@
+# - name: apt unzip nodejs
+#   apt:
+#     name: 
+#       - 'unzip'
+#       - 'nodejs'
+#       - 'npm'
+#     update_cache: true
+#     state: present
+
+# - name: npm cache clean
+#   shell: npm cache clean -f
+
+# - name: npm install n
+#   npm:
+#     global: yes
+#     name: "n"
+#     state: present
+
+# - name: upgrade nodejs
+#   shell: n stable
+
+# - name: get node version
+#   shell: node -v
+#   register: nodev
+
+# - name: show node version
+#   debug:
+#     msg: "node version is {{nodev.stdout}}"
+
+# - name: get npm version
+#   shell: npm -v
+#   register: npmv
+
+# - name: show npm version
+#   debug:
+#     msg: "npm version is {{npmv.stdout}}"
+
+# - name: npm install pm2
+#   community.general.npm:
+#     name: pm2
+#     global: yes
+
+# - name: Make dir clash
+#   file:
+#     path: /opt/clash
+#     state: directory
+#     mode: '0755'
+#     owner: cocafe
+#     group: cocafe
+
+# # cannot download in mainland
+# # - name: Download clash
+# #   become: yes
+# #   become_user: cocafe
+# #   get_url:
+# #     url: https://github.com/Dreamacro/clash/releases/download/v1.7.1/clash-linux-amd64-v1.7.1.gz
+# #     dest: /opt/clash/clash-linux-amd64-v1.7.1.gz
+# #     mode: '0755'
+
+# - name: upload clash.gz
+#   copy: 
+#     dest: /opt/clash/clash-linux-amd64-v1.7.1.gz
+#     src: clash-linux-amd64-v1.7.1.gz
+#     owner: cocafe
+#     group: cocafe
+#     mode: '0755'
+
+# - name: gunzip clash by shell
+#   become: yes
+#   become_user: cocafe
+#   shell: "gunzip /opt/clash/clash-linux-amd64-v1.7.1.gz"
+#   args:
+#     chdir: /opt/clash/
+#     creates: clash-linux-amd64-v1.7.1
+
+- name: upload config.yaml
+  copy: 
+    dest: /opt/config.yaml
+    src: config.yaml
+    owner: cocafe
+    group: cocafe
+    mode: '0644'
+
+# Cannot Unarchive gz file
+# - name: Unarchive clash
+#   ansible.builtin.unarchive:
+#     src: /opt/clash/clash-linux-amd64-v1.7.1.gz
+#     dest: /opt/clash/
+#     remote_src: yes
+
+# - name: Create a symbolic link
+#   ansible.builtin.file:
+#     src: /opt/clash/clash-linux-amd64-v1.7.1
+#     dest: /opt/clash/clash
+#     owner: cocafe
+#     group: cocafe
+#     state: link
+
+- name: upload start_clash.sh
+  copy: 
+    dest: /opt/clash/start_clash.sh
+    src: start_clash.sh
+    owner: cocafe
+    group: cocafe
+    mode: '0755'
+
+- name: stop clash
+  become: yes
+  become_user: cocafe
+  shell: 'pm2 stop start_clash.sh'
+  args:
+    chdir: /opt/clash/
+
+- name: start clash
+  become: yes
+  become_user: cocafe
+  shell: 'pm2 start start_clash.sh'
+  args:
+    chdir: /opt/clash/
+
+# - name: add export proxy to .bashrc
+#   become: yes
+#   become_user: cocafe
+#   lineinfile:
+#     path: /home/cocafe/.bashrc
+#     line: 'export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7891'
