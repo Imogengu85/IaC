@@ -1,4 +1,4 @@
-- hosts: new-svr
+- hosts: pcn-u1
   become: yes
   remote_user: root
   roles: 

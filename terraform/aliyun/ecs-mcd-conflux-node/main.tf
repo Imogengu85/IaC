@@ -21,16 +21,27 @@ resource "alicloud_security_group_rule" "allow_http_22" {
   cidr_ip           = "0.0.0.0/0"
 }
 
-# resource "alicloud_security_group_rule" "allow_tcp_61668" {
-#   type              = "ingress"
-#   ip_protocol       = "tcp"
-#   nic_type          = var.nic_type
-#   policy            = "accept"
-#   port_range        = "61668/61668"
-#   priority          = 1
-#   security_group_id = alicloud_security_group.group.id
-#   cidr_ip           = "0.0.0.0/0"
-# }
+resource "alicloud_security_group_rule" "allow_tcp_61610" {
+  type              = "ingress"
+  ip_protocol       = "tcp"
+  nic_type          = var.nic_type
+  policy            = "accept"
+  port_range        = "61610/61610"
+  priority          = 1
+  security_group_id = alicloud_security_group.group.id
+  cidr_ip           = "0.0.0.0/0"
+}
+
+resource "alicloud_security_group_rule" "allow_tcp_7890" {
+  type              = "ingress"
+  ip_protocol       = "tcp"
+  nic_type          = var.nic_type
+  policy            = "accept"
+  port_range        = "7890/7890"
+  priority          = 1
+  security_group_id = alicloud_security_group.group.id
+  cidr_ip           = "172.16.0.0/12"
+}
 
 # resource "alicloud_security_group_rule" "allow_tcp_8081" {
 #   type              = "ingress"

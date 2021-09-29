@@ -34,6 +34,14 @@ variable "internet_max_bandwidth_out" {
   default = 10
 }
 
+variable "payment_type" {
+  default = "PayAsYouGo"
+}
+
 variable "nic_type" {
   default = "intranet"
+}
+
+variable "eip_name" {
+  default = "eip-trj"
 }

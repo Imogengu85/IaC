@@ -1,0 +1,5 @@
+---
+mysql_database_name: porsche
+mysql_user_name: cocafe
+mysql_user_password: Nftfanatic10@$
+mysql_config_file: /etc/mysql/mysql.conf.d/mysqld.cnf

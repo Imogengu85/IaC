@@ -1,0 +1,110 @@
+# - name: apt install nginx,nodejs,npm
+#   apt:
+#     name: 
+#       - 'nginx'
+#       - 'nodejs'
+#       - 'npm'
+#     update_cache: true
+#     state: present
+
+# - name: npm cache clean
+#   shell: npm cache clean -f
+
+# - name: Update npm
+#   community.general.npm:
+#     name: npm
+#     global: yes
+#     state: latest
+
+# - name: npm install n
+#   npm:
+#     global: yes
+#     name: "n"
+#     state: present
+
+# - name: upgrade nodejs
+#   shell: n stable
+
+# - name: get node version
+#   shell: node -v
+#   register: nodev
+
+# - name: show node version
+#   debug:
+#     msg: "node version is {{nodev.stdout}}"
+
+# - name: get npm version
+#   shell: npm -v
+#   register: npmv
+
+# - name: show npm version
+#   debug:
+#     msg: "npm version is {{npmv.stdout}}"
+
+- name: Read-write git checkout from github
+  become: yes
+  become_user: cocafe
+  ansible.builtin.git:
+    repo: "git@github.com:cocafe-labs/porsche-frontend.git"
+    dest: "/var/cocafe-output/{{ project_name }}"
+    force: yes
+
+- name: npm ci
+  become: yes
+  become_user: cocafe
+  community.general.npm:
+    path: /var/cocafe-output/{{ project_name }}
+    ci: yes
+  
+- name: remove build
+  file:
+    path: "/var/cocafe-output/{{ project_name }}/build"
+    state: absent
+
+- name: npm run build
+  become: yes
+  become_user: cocafe
+  shell: "npm run build"
+  args:
+    chdir: "/var/cocafe-output/{{ project_name }}/"
+
+# - name: update website's nginx configuration
+#   template:
+#     src: "{{ project_name }}.j2"
+#     dest: "/etc/nginx/sites-enabled/{{ project_name }}"
+#     mode: 0755
+
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
+
+# - name: snap update core
+#   community.general.snap:
+#     name: core
+#     state: present
+
+# - name: apt remove certbot
+#   apt:
+#     name: certbot
+#     state: absent
+
+# - name: snap install certbot
+#   community.general.snap:
+#     name: certbot
+#     classic: yes
+#     state: present
+
+# - name: create a /usr/bin/ symbol link for certbot
+#   file:
+#     src: /snap/bin/certbot
+#     dest: /usr/bin/certbot
+#     state: link
+
+# - name: generate certification due to  nginx configuration
+#   shell: 'certbot --nginx'
+#   register: certout
+
+# - name: show certbot's output
+#   debug:
+#     vars: certout.stdout

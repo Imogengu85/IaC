@@ -1,0 +1,5 @@
+---
+service_ip: 127.0.0.1
+service_port: 8089
+server_domain_name: pcnnfttest-t.cocafe.co
+project_name: pcnnfttest-t

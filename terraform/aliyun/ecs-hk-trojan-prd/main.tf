@@ -29,7 +29,7 @@ resource "alicloud_security_group_rule" "allow_https_443" {
   port_range        = "443/443"
   priority          = 1
   security_group_id = alicloud_security_group.group.id
-  cidr_ip           = "0.0.0.0/0"
+  cidr_ip           = "139.224.114.28/32"
 }
 
 resource "alicloud_security_group_rule" "allow_https_80" {
@@ -66,8 +66,8 @@ resource "alicloud_instance" "instance" {
   security_groups = alicloud_security_group.group.*.id
   vswitch_id      = alicloud_vswitch.vswitch.id
 
-  internet_charge_type       = var.internet_charge_type
-  internet_max_bandwidth_out = var.internet_max_bandwidth_out
+  # internet_charge_type       = var.internet_charge_type
+  # internet_max_bandwidth_out = var.internet_max_bandwidth_out
 
   password = var.ecs_password
   instance_charge_type = "PrePaid"
@@ -85,3 +85,16 @@ resource "alicloud_instance" "instance" {
     project   = var.project
   }
 }
+
+resource "alicloud_eip" "eip-cocafe" {
+  # address_name         = var.eip_name
+  bandwidth            = var.internet_max_bandwidth_out
+  internet_charge_type = var.internet_charge_type
+  # payment_type         = var.payment_type
+}
+
+resource "alicloud_eip_association" "eip_asso" {
+  allocation_id = alicloud_eip.eip-cocafe.id
+  instance_id   = alicloud_instance.instance.0.id
+}
+

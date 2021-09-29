@@ -1,0 +1,5 @@
+- hosts: mcd-p1
+  become: yes
+  remote_user: root
+  roles: 
+    - mcd-prd-mysql

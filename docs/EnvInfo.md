@@ -24,6 +24,30 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | cfx-m1.s.cocafe.co | 106.14.3.206 | 172.16.0.224 | i-uf6a3gb3boxohqzzhgp0 | Conflux主网全节点 | conflux node | conflux-rust | maogongyin | maogongyin,panchen,yuanshanshan | 4C/16G/20GB+200GB/10Mbps | 
 
+### The BOND Protocol
+
+#### [UAT] BOND 
+
+- CDN: https://elements.cocafe.co
+- Project path:
+  + NFO Project PATH: bucket-elements.oss-cn-shanghai.aliyuncs.com/nfo
+
+> OSS bucket-elements bucket is a BOND's OSS, serves for multiple projects.
+> It uses elements.cocafe.co for its CDN domain.
+> Each project has a specified path.
+
+| ID | extranet_endpoint | intranet_endpoint | ResourceID | Description |  Service | Owner |
+| --- | --- | --- | --- | --- | --- | --- |
+| bucket-elements | oss-cn-shanghai.aliyuncs.com | oss-cn-shanghai-internal.aliyuncs.com | bucket-elements | CDN-NFO | https/http | maogongyin |
+
+### NFO
+
+#### [TEST] NFO
+
+| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+
+
 ### PCN
 
 #### [UAT] PCN
@@ -93,4 +117,4 @@
 
 | Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User | Hardware |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| trj.s.cocafe.co | 47.242.0.126 | 172.16.0.70 | i-j6c4xfvat6r2saehtrv5 | Trojan服务器 | trojan | Mysql,nginx | maogongyin | maogongyin,panchen |2C/8G/20GB/10Mbps | 
+| trj.s.cocafe.co | 47.243.145.186 | 172.16.0.70 | i-j6c4xfvat6r2saehtrv5 | Trojan服务器 | trojan | Mysql,nginx | maogongyin | maogongyin,panchen |2C/8G/20GB/10Mbps | 

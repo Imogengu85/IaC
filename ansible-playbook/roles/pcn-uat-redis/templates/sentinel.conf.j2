@@ -1,0 +1,13 @@
+bind 0.0.0.0
+protected-mode no
+daemonize yes
+pidfile "/var/run/sentinel/redis-sentinel.pid"
+logfile "/var/log/redis/redis-sentinel.log"
+port 26379
+dir "/var/lib/redis"
+sentinel myid 1b519ce8b9e4ed9579974fbba975fb74da2bcc6d
+sentinel monitor mymaster {{ master_ip }} {{ redis_port }} 2
+sentinel auth-pass mymaster {{ requirepass_secret }}
+sentinel config-epoch mymaster 0
+sentinel leader-epoch mymaster 0
+sentinel current-epoch 0

@@ -11,12 +11,12 @@ server {
                  proxy_set_header X-Forward-For $remote_addr;
                  proxy_set_header X-real-ip $remote_addr;
                  proxy_read_timeout 300s;
-                 access_log /var/log/nginx/mcd.access.log;
+                 access_log /var/log/nginx/{{ project_name }}.access.log;
                  client_max_body_size 2g;
                  proxy_pass http://{{ service_ip }}:{{ service_port }}/$1;
         }
         location / {
-            root /var/cocafe-output/mcd-frontend/build;
+            root /var/cocafe-output/{{ project_name }}/build;
             try_files $uri $uri/ /index.html;
             index index.html;
         }

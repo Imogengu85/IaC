@@ -1,33 +1,86 @@
-- name: apt install nginx
+- name: apt install nginx,nodejs,npm
   apt:
-    name: nginx
+    name: 
+      - 'nginx'
+      - 'nodejs'
+      - 'npm'
     update_cache: true
     state: present
+
+- name: npm cache clean
+  shell: npm cache clean -f
+
+- name: Update npm
+  community.general.npm:
+    name: npm
+    global: yes
+    state: latest
+
+- name: npm install n
+  npm:
+    global: yes
+    name: "n"
+    state: present
+
+- name: upgrade nodejs
+  shell: n stable
+
+- name: get node version
+  shell: node -v
+  register: nodev
+
+- name: show node version
+  debug:
+    msg: "node version is {{nodev.stdout}}"
+
+- name: get npm version
+  shell: npm -v
+  register: npmv
+
+- name: show npm version
+  debug:
+    msg: "npm version is {{npmv.stdout}}"
+
+- name: create cocafe-output directory
+  file:
+    path: /var/cocafe-output/
+    state: directory
+    owner: cocafe
+    group: cocafe
+    mode: 0755
 
 - name: Read-write git checkout from github
   become: yes
   become_user: cocafe
   ansible.builtin.git:
-    repo: git@github.com:cocafe-labs/mcd-frontend.git
-    dest: /var/cocafe-output/mcd-frontend
+    repo: "git@github.com:cocafe-labs/mcd-frontend.git"
+    dest: "/var/cocafe-output/{{ project_name }}"
     force: yes
 
-
+- name: npm ci
+  become: yes
+  become_user: cocafe
+  community.general.npm:
+    path: /var/cocafe-output/{{ project_name }}
+    ci: yes
+  
 - name: remove build
   file:
-    path: /var/cocafe-output/mcd-frontend/build
+    path: "/var/cocafe-output/{{ project_name }}/build"
     state: absent
 
 - name: npm run build
   become: yes
   become_user: cocafe
-  shell: "cd /var/cocafe-output/mcd-frontend && npm run build"
+  shell: "npm run build"
+  args:
+    chdir: "/var/cocafe-output/{{ project_name }}/"
 
-# - name: update website's nginx configuration
-#   template:
-#     src: mcd-test.j2
-#     dest: /etc/nginx/sites-enabled/mcd-test
-#     mode: 0755
+- name: update website's nginx configuration
+  template:
+    src: "{{ project_name }}.j2"
+    dest: "/etc/nginx/sites-enabled/{{ project_name }}"
+    mode: 0755
 
 - name: restart nginx
   systemd:

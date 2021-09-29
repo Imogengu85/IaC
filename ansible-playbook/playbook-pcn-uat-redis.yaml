@@ -1,0 +1,5 @@
+- hosts: pcn-u1
+  become: yes
+  remote_user: root
+  roles: 
+    - pcn-uat-redis

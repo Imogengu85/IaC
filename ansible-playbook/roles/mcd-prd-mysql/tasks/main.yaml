@@ -58,11 +58,21 @@
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
-# - name: Create table staff
-#   community.mysql.mysql_query:
-#     login_db: "{{ mysql_database_name }}"
-#     login_unix_socket: /var/run/mysqld/mysqld.sock
-#     query: CREATE TABLE `staff` (`id` int NOT NULL AUTO_INCREMENT,`staff_id` varchar(300) NOT NULL,`name` char(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,`phone` char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,`email` varchar(200) NOT NULL,`dept` varchar(200) DEFAULT NULL,`image_url` varchar(400) NOT NULL DEFAULT '',`memories` text,`update_time` datetime DEFAULT NULL,PRIMARY KEY (`id`),UNIQUE KEY `staff_id` (`staff_id`),UNIQUE KEY `phone` (`phone`),KEY `idx_name` (`staff_id`,`name`)) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+- name: Create table mcd-mysql
+  community.mysql.mysql_query:
+    login_db: "{{ mysql_database_name }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    query: "CREATE TABLE `nft` (
+                       `id` int NOT NULL AUTO_INCREMENT,
+                       `invite_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+                       `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+                       `status` int NOT NULL,
+                       `cid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
+                       `generate_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+                       `address` varchar(255) DEFAULT NULL,
+                       `update_time` datetime DEFAULT NULL,
+                       PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;"
 
 # - name: truncate table staff
 #   community.mysql.mysql_query:

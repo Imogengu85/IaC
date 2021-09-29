@@ -1,4 +1,5 @@
 ---
 service_ip: 127.0.0.1
 service_port: 61668
-server_domain_name: mcdnft-u.cocafe.co
+server_domain_name: mcdnft.cocafe.co
+project_name: mcdnft
