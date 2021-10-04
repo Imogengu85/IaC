@@ -12,6 +12,9 @@ cfx-m1 ansible_ssh_host=cfx-m1.s.cocafe.co ansible_ssh_user=cocafe
 [pcn-uat]
 pcn-u1 ansible_ssh_host=pcn-u1.s.cocafe.co ansible_ssh_user=cocafe
 
+[nfo-test]
+nfo-t1 ansible_ssh_host=nfo-t1.s.cocafe.co ansible_ssh_user=cocafe
+
 [mc]
 mcmemories-1 ansible_ssh_host=47.241.178.221 ansible_ssh_user=cocafe
 
@@ -28,10 +31,12 @@ mainpage-web ansible_ssh_host=8.210.254.249 ansible_ssh_user=cocafe
 [trj-prd]
 trj ansible_ssh_host=trj.s.cocafe.co ansible_ssh_user=cocafe
 
+[prometheus]
+prm ansible_ssh_host=prm.s.cocafe.co ansible_ssh_user=cocafe
+
 [clash]
 clash-01 ansible_ssh_host=47.241.161.208 ansible_ssh_user=cocafe
 
 [new-svr]
-mcd-coVault
-mcd-p1
-pcn-u1
+prm
+nfo-t1

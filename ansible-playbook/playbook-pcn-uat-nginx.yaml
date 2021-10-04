@@ -1,0 +1,6 @@
+- hosts: pcn-u1
+  become: yes
+  remote_user: root
+  gather_facts: False
+  roles: 
+    - pcn-uat-nginx

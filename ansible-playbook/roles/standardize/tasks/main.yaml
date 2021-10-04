@@ -40,22 +40,21 @@
     state: present
 
 
+- name: send go
+  copy: 
+    src: files/go1.17.1.linux-amd64.tar.gz
+    dest: '/root/go1.17.1.linux-amd64.tar.gz'
+    owner: root
+    group: root
+    mode: 0644
 
-# - name: send go
-#   copy: 
-#     src: files/go1.16.7.linux-amd64.tar.gz
-#     dest: '/root/go1.16.7.linux-amd64.tar.gz'
-#     owner: root
-#     group: root
-#     mode: 0644
-
-- name: get go
-  become: yes
-  become_user: cocafe
-  shell: "wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz"
+# - name: get go
+#   become: yes
+#   become_user: cocafe
+#   shell: "wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz"
 
 - name: install go
-  shell: "rm -rf /usr/local/go && tar -C /usr/local -xzf /home/cocafe/go1.17.1.linux-amd64.tar.gz"
+  shell: "rm -rf /usr/local/go && tar -C /usr/local -xzf /root/go1.17.1.linux-amd64.tar.gz"
 
 - name: add go path
   become: yes

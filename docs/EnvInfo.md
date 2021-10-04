@@ -2,6 +2,14 @@
 
 [toc]
 
+## Project Name
+
+- mcd
+- porsche
+- nfo
+- coportal
+- covault
+
 ## cocafe IPFS
 
 ### Pinata
@@ -42,11 +50,15 @@
 
 ### NFO
 
+
 #### [TEST] NFO
+
+- URIs: https://nfo-t.cocafe.co
+- Version:
 
 | Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-
+| nfo-t1.s.cocafe.co | 47.101.185.144 | 172.16.0.228 | i-uf6d5yupyj1qsz8or1cv | NFO 集成测试环境服务器 | nfo-backend,coportal-backend,nfo-frontend | nginx,mysql  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
 
 ### PCN
 
@@ -118,3 +130,4 @@
 | Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User | Hardware |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | trj.s.cocafe.co | 47.243.145.186 | 172.16.0.70 | i-j6c4xfvat6r2saehtrv5 | Trojan服务器 | trojan | Mysql,nginx | maogongyin | maogongyin,panchen |2C/8G/20GB/10Mbps | 
+| prm.s.cocafe.co | 47.100.52.18 | 172.16.0.227 | i-uf69vzokp3y1wep6k9lq | Prometheus服务器 | prometheus-server | -  | maogongyin | maogongyin,panchen |4C/16G/200GB/10Mbps | 

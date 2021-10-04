@@ -1,3 +1,3 @@
-- hosts: trj
+- hosts: mcd-t1
   roles: 
     - authority

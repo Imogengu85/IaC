@@ -1,5 +1,5 @@
-- hosts: new-svr
+- hosts: nfo-t1
   become: yes
   remote_user: root
   roles: 
-    - standardize
+    - nfo-test-nginx

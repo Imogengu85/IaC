@@ -37,6 +37,13 @@ resource "alicloud_dns_record" "pcnnfttest-t" {
   value       = "mcd-t1.s.cocafe.co"
 }
 
+resource "alicloud_dns_record" "pcnnfttest" {
+  name        = "cocafe.co"
+  host_record = "pcnnfttest"
+  type        = "CNAME"
+  value       = "pcn-u1.s.cocafe.co"
+}
+
 resource "alicloud_dns_record" "_dnsauth_elements" {
   name        = "cocafe.co"
   host_record = "_dnsauth.elements"
@@ -56,5 +63,26 @@ resource "alicloud_dns_record" "elements" {
   host_record = "elements"
   type        = "CNAME"
   value       = "elements.cocafe.co.w.kunlunca.com"
+}
+
+resource "alicloud_dns_record" "prm_s" {
+  name        = "cocafe.co"
+  host_record = "prm.s"
+  type        = "A"
+  value       = "47.100.52.18"
+}
+
+resource "alicloud_dns_record" "nfo_t1_s" {
+  name        = "cocafe.co"
+  host_record = "nfo-t1.s"
+  type        = "A"
+  value       = "47.101.185.144"
+}
+
+resource "alicloud_dns_record" "nfo_t" {
+  name        = "cocafe.co"
+  host_record = "nfo-t"
+  type        = "CNAME"
+  value       = "nfo-t1.s.cocafe.co"
 }
 
