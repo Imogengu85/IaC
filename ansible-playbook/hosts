@@ -15,6 +15,24 @@ pcn-u1 ansible_ssh_host=pcn-u1.s.cocafe.co ansible_ssh_user=cocafe
 [nfo-test]
 nfo-t1 ansible_ssh_host=nfo-t1.s.cocafe.co ansible_ssh_user=cocafe
 
+[nfo-uat]
+nfo-u1 ansible_ssh_host=nfo-u1.s.cocafe.co ansible_ssh_user=cocafe
+nfo-u2 ansible_ssh_host=nfo-u2.s.cocafe.co ansible_ssh_user=cocafe
+nfo-u3 ansible_ssh_host=nfo-u3.s.cocafe.co ansible_ssh_user=cocafe
+nfo-u4 ansible_ssh_host=nfo-u4.s.cocafe.co ansible_ssh_user=cocafe
+
+[nfo-uat-mysql]
+nfo-u3 master=1 server_id=1
+nfo-u4 master=0 server_id=2
+
+[nfo-uat-redis]
+nfo-u1 redis_master=0
+nfo-u3 redis_master=0
+nfo-u4 redis_master=1
+
+[nfo-prd]
+nfo-p1 ansible_ssh_host=nfo-p1.s.cocafe.co ansible_ssh_user=cocafe
+
 [mc]
 mcmemories-1 ansible_ssh_host=47.241.178.221 ansible_ssh_user=cocafe
 
@@ -38,5 +56,6 @@ prm ansible_ssh_host=prm.s.cocafe.co ansible_ssh_user=cocafe
 clash-01 ansible_ssh_host=47.241.161.208 ansible_ssh_user=cocafe
 
 [new-svr]
-prm
-nfo-t1
+nfo-u2
+nfo-u3
+nfo-u4

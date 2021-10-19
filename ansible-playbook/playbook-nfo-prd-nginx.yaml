@@ -1,0 +1,5 @@
+- hosts: nfo-p1
+  become: yes
+  remote_user: root
+  roles: 
+    - nfo-prd-nginx

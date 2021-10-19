@@ -86,3 +86,65 @@ resource "alicloud_dns_record" "nfo_t" {
   value       = "nfo-t1.s.cocafe.co"
 }
 
+resource "alicloud_dns_record" "_dnsauth_elements-test" {
+  name        = "cocafe.co"
+  host_record = "_dnsauth.elements-test"
+  type        = "TXT"
+  value       = "202110072230213d1u2jzumtwb6fwemnjr3aaavoa1my9ksefblpoc9jg33ndtqi"
+}
+
+resource "alicloud_dns_record" "elements-test" {
+  name        = "cocafe.co"
+  host_record = "elements-test"
+  type        = "CNAME"
+  value       = "elements-test.cocafe.co.w.kunlunpi.com"
+}
+
+resource "alicloud_dns_record" "nfo_p1_s" {
+  name        = "cocafe.co"
+  host_record = "nfo-p1.s"
+  type        = "A"
+  value       = "47.100.193.199"
+}
+
+resource "alicloud_dns_record" "nfo" {
+  name        = "cocafe.co"
+  host_record = "nfo"
+  type        = "CNAME"
+  value       = "nfo-p1.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "nfo_u1_s" {
+  name        = "cocafe.co"
+  host_record = "nfo-u1.s"
+  type        = "A"
+  value       = "47.100.25.40"
+}
+
+resource "alicloud_dns_record" "nfo_u" {
+  name        = "cocafe.co"
+  host_record = "nfo-u"
+  type        = "CNAME"
+  value       = "nfo-u1.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "nfo_u2_s" {
+  name        = "cocafe.co"
+  host_record = "nfo-u2.s"
+  type        = "A"
+  value       = "47.100.112.167"
+}
+
+resource "alicloud_dns_record" "nfo_u3_s" {
+  name        = "cocafe.co"
+  host_record = "nfo-u3.s"
+  type        = "A"
+  value       = "101.132.79.166"
+}
+
+resource "alicloud_dns_record" "nfo_u4_s" {
+  name        = "cocafe.co"
+  host_record = "nfo-u4.s"
+  type        = "A"
+  value       = "106.15.190.73"
+}

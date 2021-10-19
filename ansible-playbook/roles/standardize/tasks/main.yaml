@@ -98,3 +98,11 @@
     path: $HOME/.bashrc
   tags:
     - science
+
+- name: mkdir cocafe-output
+  file:
+    path: /var/cocafe-output
+    state: directory
+    owner: cocafe
+    group: cocafe
+    mode:  0755

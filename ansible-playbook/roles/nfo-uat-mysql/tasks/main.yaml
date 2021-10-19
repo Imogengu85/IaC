@@ -1,0 +1,151 @@
+- name: apt install mysql,pip3,other dependancy
+  apt:
+    name: 
+      - mysql-server
+      - python3-pip
+      - python3-dev
+      - default-libmysqlclient-dev
+      - build-essential
+    update_cache: true
+    state: present
+
+- name: pip install PyMySQL
+  pip:
+    name: 
+      - PyMySQL
+
+- name: set mysql binding address to *
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^bind-address'
+    line: 'bind-address  = *'
+    state: present
+
+- name: set mysql configure log_bin [only on master]
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^log_bin'
+    insertafter: '^#log_bin'
+    line: 'log_bin			= /var/log/mysql/master-bin.log'
+    state: present
+  when: master==1
+
+- name: set mysql server_id
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^server-id'
+    insertafter: '^#server-id'
+    line: 'server-id		= {{ server_id }}'
+    state: present
+
+- name: restart mysql server
+  systemd:
+    name: mysql
+    state: restarted
+    daemon-reload: yes
+
+- name: create database {{mysql_database_name_1}} [only on master]
+  community.mysql.mysql_db:
+    name: "{{mysql_database_name_1}}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master==1
+
+- name: create database {{mysql_database_name_2}} [only on master]
+  community.mysql.mysql_db:
+    name: "{{mysql_database_name_2}}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master==1
+
+- name: Create app user {{mysql_user_name}} and privileges @% and 'WITH GRANT OPTION' to {{mysql_database_name}}
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    host: '%'
+    priv: '{{mysql_database_name_1}}.*:ALL,GRANT'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master==1
+
+
+- name: Create app user {{mysql_user_name}} and privileges @% and 'WITH GRANT OPTION' to {{mysql_database_name2}}
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    append_privs: yes
+    host: '%'
+    priv: '{{mysql_database_name_2}}.*:ALL,GRANT'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master==1
+
+- name: Create repl user {{mysql_repl_user_name}} and privileges and 'WITH GRANT OPTION' [only on master]
+  community.mysql.mysql_user:
+    name: "{{mysql_repl_user_name}}"
+    password: "{{mysql_repl_user_password}}"
+    priv: '*.*:REPLICATION CLIENT,REPLICATION SLAVE'
+    state: present
+    host: "{{mysql_network_grants}}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master==1
+
+- name: Stop standby server [only on standby]
+  community.mysql.mysql_replication:
+    mode: stopreplica
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    login_user: root
+  when: master!=1
+
+- name: Change master to {{mysql_master_ip}} [only on standby]
+  community.mysql.mysql_replication:
+    mode: changeprimary
+    primary_host: '{{mysql_master_ip}}'
+    primary_user: '{{mysql_repl_user_name}}'
+    primary_password: '{{mysql_repl_user_password}}'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master!=1
+
+- name: Start standby server [only on standby]
+  community.mysql.mysql_replication:
+    mode: startreplica
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master!=1
+
+- name: Get master server status [only on master]
+  community.mysql.mysql_replication:
+    mode: getprimary
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master==1
+  register: primaryoutput
+
+- name: Get standby server status [only on standby]
+  community.mysql.mysql_replication:
+    mode: getreplica
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master!=1
+  register: standbyoutput
+
+- name: Show master databases' status
+  debug:
+    msg: " Master Status : {{ primaryoutput }} "
+  when: master==1
+
+- name: Show standby databases' status
+  debug:
+    msg: " Standby Status : {{ standbyoutput }} "
+  when: master!=1
+
+- name: Set read_only variable to 1 persistently [only on standby]
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: 1
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master!=1
+
+- name: Set super_read_only variable to 1 persistently [only on standby]
+  community.mysql.mysql_variables:
+    variable: super_read_only
+    value: 1
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master!=1

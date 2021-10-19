@@ -1,0 +1,6 @@
+---
+service_ip_1: 172.16.0.229
+service_ip_2: 172.16.0.232
+service_port: 8080
+server_domain_name: nfo-u.cocafe.co
+project_name: nfo-u

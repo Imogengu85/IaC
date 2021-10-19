@@ -1,0 +1,5 @@
+- hosts: nfo-uat-redis
+  become: yes
+  remote_user: root
+  roles: 
+    - nfo-uat-redis

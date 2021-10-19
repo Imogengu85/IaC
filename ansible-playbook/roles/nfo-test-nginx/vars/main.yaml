@@ -1,5 +1,5 @@
 ---
 service_ip: 127.0.0.1
-service_port: 8089
+service_port: 8080
 server_domain_name: nfo-t.cocafe.co
 project_name: nfo-t

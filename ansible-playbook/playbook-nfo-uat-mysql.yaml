@@ -1,0 +1,5 @@
+- hosts: nfo-uat-mysql
+  become: yes
+  remote_user: root
+  roles: 
+    - nfo-uat-mysql

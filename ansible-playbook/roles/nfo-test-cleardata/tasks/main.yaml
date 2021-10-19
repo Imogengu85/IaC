@@ -1,0 +1,26 @@
+
+
+- name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' to {{mysql_database_name}}
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    host: localhost
+    priv: '{{mysql_database_name}}.*:ALL,GRANT'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+
+- name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' to {{mysql_database_name2}}
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    append_privs: yes
+    host: localhost
+    priv: '{{mysql_database_name2}}.*:ALL,GRANT'
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+
+
+#update users set user_id='',nickname='',white=0 where open_id='oiziR4iUcW_a8IK9LCrteBnOb7MY';
+

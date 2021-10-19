@@ -9,3 +9,11 @@ variable "vpc_prd" {
 variable "vpc_no_prd" {
   default = "vpc-uf6guef63019zllctjup9"
 }
+
+variable "domain_name" {
+  default = "elements-test.cocafe.co"
+}
+
+variable "oss_name" {
+  default = "bucket-elements-test.oss-cn-shanghai.aliyuncs.com"
+}

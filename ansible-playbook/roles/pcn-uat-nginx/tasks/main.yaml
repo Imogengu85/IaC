@@ -87,27 +87,27 @@
     name: nginx
     state: restarted
 
-- name: snap update core
-  community.general.snap:
-    name: core
-    state: present
+# - name: snap update core
+#   community.general.snap:
+#     name: core
+#     state: present
 
-- name: apt remove certbot
-  apt:
-    name: certbot
-    state: absent
+# - name: apt remove certbot
+#   apt:
+#     name: certbot
+#     state: absent
 
-- name: snap install certbot
-  community.general.snap:
-    name: certbot
-    classic: yes
-    state: present
+# - name: snap install certbot
+#   community.general.snap:
+#     name: certbot
+#     classic: yes
+#     state: present
 
-- name: create a /usr/bin/ symbol link for certbot
-  file:
-    src: /snap/bin/certbot
-    dest: /usr/bin/certbot
-    state: link
+# - name: create a /usr/bin/ symbol link for certbot
+#   file:
+#     src: /snap/bin/certbot
+#     dest: /usr/bin/certbot
+#     state: link
 
 # - name: generate certification due to  nginx configuration
 #   shell: 'certbot --nginx'

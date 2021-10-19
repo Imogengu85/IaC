@@ -1,18 +1,18 @@
 # Create a new Domain.
 resource "alicloud_cdn_domain_new" "elements" {
-  domain_name = "elements.cocafe.co"
+  domain_name = var.domain_name
   cdn_type    = "web"
   scope       = "domestic"
   sources {
-    content  = "bucket-elements.oss-cn-shanghai.aliyuncs.com"
+    content  = var.oss_name
     type     = "oss"
     priority = 20
     port     = 80
     weight   = 10
   }
   certificate_config {
-    private_key = file("${path.module}/elements.key")
-    server_certificate = file("${path.module}/elements.crt")
+    private_key = file("${path.module}/elements-test.key")
+    server_certificate = file("${path.module}/elements-test.crt")
     cert_type = "upload"
   }
 }

@@ -30,7 +30,7 @@ resource "alicloud_instance" "instance" {
   vswitch_id      = var.vswitch_id
   instance_charge_type = "PrePaid"
   period = 1
-  renewal_status  = "AutoRenewal"
+  renewal_status  = "NotRenewal"
 
   password = var.ecs_password
 

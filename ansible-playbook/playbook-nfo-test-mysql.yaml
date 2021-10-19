@@ -1,0 +1,5 @@
+- hosts: nfo-t1
+  become: yes
+  remote_user: root
+  roles: 
+    - nfo-test-mysql

@@ -1,0 +1,10 @@
+---
+mysql_database_name_1: nfo
+mysql_database_name_2: coportal
+mysql_user_name: cocafe
+mysql_user_password: Nftfanatic10@$
+mysql_config_file: /etc/mysql/mysql.conf.d/mysqld.cnf
+mysql_repl_user_name: repl
+mysql_repl_user_password: Nftfanatic10@$
+mysql_network_grants: "172.16.0.%"
+mysql_master_ip: "172.16.0.232"

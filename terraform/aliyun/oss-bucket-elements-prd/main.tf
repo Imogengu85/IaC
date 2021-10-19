@@ -14,4 +14,8 @@ resource "alicloud_oss_bucket" "bucket-new" {
     index_document = "index.html"
     error_document = "index.html"
   }
+  cors_rule {
+    allowed_origins = ["*"]
+    allowed_methods = ["GET", "POST"]
+  }
 }
