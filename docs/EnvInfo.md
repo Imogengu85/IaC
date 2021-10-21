@@ -100,6 +100,7 @@
 | nfo-u2.s.cocafe.co | 47.100.112.167 | 172.16.0.231 | i-uf6bsml3xp6iz2kwrey7 | NFO 验收测试环境服务器2 | nfo-frontend | nginx  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
 | nfo-u3.s.cocafe.co | 101.132.79.166 | 172.16.0.232| i-uf6ahsy0hptf86k59ns2 | NFO 验收测试环境服务器3 | nfo-backend | redis,mysql-master  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
 | nfo-u4.s.cocafe.co | 106.15.190.73 | 172.16.0.230 | ii-uf6byjhd4wd9oz41lkzu | NFO 验收测试环境服务器4 | coPortal,coVault | redis-master,mysql-slave  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+| nfo-uat-slb | 139.224.54.7 | n/a | lb-uf6man15hmbfa97j42v0z | NFO验收测试环境负载均衡 | slb | slb | maogongyin | maogongyin | n/a | 
  
 
 #### [TEST] NFO

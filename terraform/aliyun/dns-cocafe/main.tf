@@ -124,8 +124,8 @@ resource "alicloud_dns_record" "nfo_u1_s" {
 resource "alicloud_dns_record" "nfo_u" {
   name        = "cocafe.co"
   host_record = "nfo-u"
-  type        = "CNAME"
-  value       = "nfo-u1.s.cocafe.co"
+  type        = "A"
+  value       = "139.224.54.7"
 }
 
 resource "alicloud_dns_record" "nfo_u2_s" {
