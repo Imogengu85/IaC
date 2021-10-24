@@ -4,6 +4,7 @@
 
 ## Update logs
 
+- 10.25 Update BOND Production env informations.
 - 10.20 Update the BOND, NFO UAT;
 
 ## Project Name
@@ -40,7 +41,8 @@
 
 #### [PROD] BOND
 
-
+- URIs: nfo-sim.cocafe.co
+- Version: 
 
 | Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner |  User | Hardware |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
