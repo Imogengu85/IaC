@@ -1,0 +1,7 @@
+- hosts: 
+  - bond-p6
+  - bond-p7
+  become: yes
+  remote_user: root
+  roles: 
+    - bond-prd-nginx

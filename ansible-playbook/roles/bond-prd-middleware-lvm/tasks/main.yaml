@@ -1,0 +1,62 @@
+- name: apt install lvm2 xfsprogs
+  apt:
+    name: 
+      - lvm2
+      - xfsprogs
+    update_cache: true
+    state: present
+
+- name: Install pexpect python package
+  pip:
+    name: pexpect
+
+- name: fdisk /dev/vdb
+  ansible.builtin.expect:
+    command: fdisk /dev/vdb
+    responses:
+      '(?m)^.*Welcome to fdisk.*Command \(m for help\):': "n\n"
+      'Select \(default p\):' : "\n"
+      'Partition number \(1-4, default 1\):' : "\n"
+      'First sector \(2048-419430399, default 2048\):': "\n"
+      'Last sector.*\):' : "\n"
+      '(?m)^Created a new partition.*Command \(m for help\):': "t\n"
+      'type L to list all codes\):': "8e\n"
+      '(?m)Changed type of.*m for help\):': "w\n"
+    creates: /dev/vdb1
+
+# - name: pvcreate /dev/vdb1
+#   shell: pvcreate /dev/vdb1
+
+- name: Create a volume group on /dev/vdb1
+  community.general.lvg:
+    vg: data
+    pvs: /dev/vdb1    
+
+- name: Create a logical volume of 100% with disks /dev/vdb1
+  community.general.lvol:
+    vg: data
+    lv: data
+    size: 100%VG
+    pvs: /dev/vdb1
+
+- name: Make a xfs filesystem on new lv
+  community.general.filesystem:
+    fstype: xfs
+    dev: /dev/mapper/data-data
+  
+- name: mkdir data
+  file:
+    path: /data
+    state: directory
+    owner: cocafe
+    group: cocafe
+    mode: 0755
+
+- name: write lv in fstab
+  lineinfile:
+    path: /etc/fstab
+    line: '/dev/mapper/data-data  /data  xfs  defaults  1 2'
+    state: present
+
+- name: mount filesystem to mount point
+  shell: mount -a

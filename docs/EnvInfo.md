@@ -44,11 +44,14 @@
 
 | Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner |  User | Hardware |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| bond-p1.s.cocafe.co |  | |  | coVault 生产环境服务器 | coVault | - | maogongyin |  |  |
-| bond-p2.s.cocafe.co |  | |  | BOND生产环境中间件服务器1 | mysql,redis | - | maogongyin |  |  |
-| bond-p3.s.cocafe.co |  | |  | BOND生产环境中间件服务器2 | mysql,redis | - | maogongyin |  |  |
-| bond-p4.s.cocafe.co |  | |  | BOND生产环境中间件服务器3 | redis | - | maogongyin |  |  |
-| bond-p5.s.cocafe.co |  | |  | coPortal 生产环境服务器1 | coPortal | - | maogongyin |  |  |
+| bond-p1.s.cocafe.co | 106.15.59.216 | 172.26.1.130 | i-uf6adsdfwblut9ck56ev | coVault 生产环境服务器 | coVault | - | maogongyin | maogongyin, panchen | 2C/4G/20GB/10Mbps |
+| bond-p2.s.cocafe.co | 47.101.60.175 | 172.26.1.127 | i-uf6bqt7z7xr4a8hrlqf8 | BOND生产环境中间件服务器1 | mysql,redis | - | maogongyin | maogongyin, panchen | 2C/16G/30GB+200GB/10Mbps |
+| bond-p3.s.cocafe.co | 47.100.38.226 | 172.26.1.129 | i-uf685ko8i33z65gzmvsf | BOND生产环境中间件服务器2 | mysql,redis | - | maogongyin | maogongyin, panchen  | 2C/16G/30GB+200GB/10Mbps |
+| bond-p4.s.cocafe.co | 47.100.125.148 | 172.26.1.128 | i-uf6adsdfwblut3fgt0ca | BOND生产环境中间件服务器3 | redis | - | maogongyin | maogongyin, panchen | 2C/16G/30GB+200GB/10Mbps |
+| bond-p5.s.cocafe.co | 106.15.227.24 | 172.26.1.126 | i-uf6byjhd4wdc3wf2a86g | coPortal 生产环境服务器1 | coPortal | - | maogongyin | maogongyin, panchen | 2C/16G/80GB/10Mbps |
+| bond-p6.s.cocafe.co | 106.14.148.20 | 172.26.1.132 | i-uf6gvcgydvhtv22xmfrf | BOND/NFO 生产环境服务器 1 | nfo-frondend,nfo-backend | nginx | maogongyin | maogongyin, panchen | 2C/16G/50GB/10Mbps |
+| bond-p7.s.cocafe.co | 139.224.112.153 | 172.26.1.131 | i-uf6ahsy0hpthterpwmjv | BOND/NFO 生产环境服务器 2 | nfo-frondend,nfo-backend | nginx | maogongyin | maogongyin, panchen | 2C/16G/50GB/10Mbps |
+| bond-prd-slb | 106.15.91.131 | n/a | lb-uf6xp6oabovof6kht8dvv | BOND生产环境负载均衡 | slb | slb | maogongyin | maogongyin | 50Mbps | 
 
 
 - CDN: https://elements.cocafe.co

@@ -1,0 +1,5 @@
+- hosts: bond-prd-redis]
+  become: yes
+  remote_user: root
+  roles: 
+    - bond-prd-redis

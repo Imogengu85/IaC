@@ -36,6 +36,7 @@
       - 'libssl-dev'
       - 'libaio1'
       - 'snapd'
+      - 'screen'
     update_cache: true
     state: present
 

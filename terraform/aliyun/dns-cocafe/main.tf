@@ -148,3 +148,59 @@ resource "alicloud_dns_record" "nfo_u4_s" {
   type        = "A"
   value       = "106.15.190.73"
 }
+
+resource "alicloud_dns_record" "bond_p1_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p1.s"
+  type        = "A"
+  value       = "106.15.59.216"
+}
+
+resource "alicloud_dns_record" "bond_p2_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p2.s"
+  type        = "A"
+  value       = "47.101.60.175"
+}
+
+resource "alicloud_dns_record" "bond_p3_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p3.s"
+  type        = "A"
+  value       = "47.100.38.226"
+}
+
+resource "alicloud_dns_record" "bond_p4_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p4.s"
+  type        = "A"
+  value       = "47.100.125.148"
+}
+
+resource "alicloud_dns_record" "bond_p5_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p5.s"
+  type        = "A"
+  value       = "106.15.227.24"
+}
+
+resource "alicloud_dns_record" "bond_p6_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p6.s"
+  type        = "A"
+  value       = "106.14.148.20"
+}
+
+resource "alicloud_dns_record" "bond_p7_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p7.s"
+  type        = "A"
+  value       = "139.224.112.153"
+}
+
+resource "alicloud_dns_record" "nfo_sim" {
+  name        = "cocafe.co"
+  host_record = "nfo-sim"
+  type        = "A"
+  value       = "106.15.91.131"
+}

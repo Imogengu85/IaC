@@ -1,0 +1,6 @@
+---
+service_ip_1: 172.26.1.132
+service_ip_2: 172.26.1.131
+service_port: 8080
+server_domain_name: nfo-sim.cocafe.co
+project_name: nfo-sim
