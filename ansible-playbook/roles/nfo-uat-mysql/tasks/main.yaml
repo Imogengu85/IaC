@@ -44,41 +44,41 @@
 #     state: restarted
 #     daemon-reload: yes
 
-- name: create database {{mysql_database_name_1}} [only on master]
-  community.mysql.mysql_db:
-    name: "{{mysql_database_name_1}}"
-    state: present
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-  when: master==1
+# - name: create database {{mysql_database_name_1}} [only on master]
+#   community.mysql.mysql_db:
+#     name: "{{mysql_database_name_1}}"
+#     state: present
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+#   when: master==1
 
-- name: create database {{mysql_database_name_2}} [only on master]
-  community.mysql.mysql_db:
-    name: "{{mysql_database_name_2}}"
-    state: present
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-  when: master==1
+# - name: create database {{mysql_database_name_2}} [only on master]
+#   community.mysql.mysql_db:
+#     name: "{{mysql_database_name_2}}"
+#     state: present
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+#   when: master==1
 
-- name: Create app user {{mysql_user_name}} and privileges @% and 'WITH GRANT OPTION' to {{mysql_database_name}}
-  community.mysql.mysql_user:
-    name: "{{mysql_user_name}}"
-    password: "{{mysql_user_password}}"
-    host: '%'
-    priv: '{{mysql_database_name_1}}.*:ALL,GRANT'
-    state: present
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-  when: master==1
+# - name: Create app user {{mysql_user_name}} and privileges @% and 'WITH GRANT OPTION' to {{mysql_database_name}}
+#   community.mysql.mysql_user:
+#     name: "{{mysql_user_name}}"
+#     password: "{{mysql_user_password}}"
+#     host: '%'
+#     priv: '{{mysql_database_name_1}}.*:ALL,GRANT'
+#     state: present
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+#   when: master==1
 
 
-- name: Create app user {{mysql_user_name}} and privileges @% and 'WITH GRANT OPTION' to {{mysql_database_name2}}
-  community.mysql.mysql_user:
-    name: "{{mysql_user_name}}"
-    password: "{{mysql_user_password}}"
-    append_privs: yes
-    host: '%'
-    priv: '{{mysql_database_name_2}}.*:ALL,GRANT'
-    state: present
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-  when: master==1
+# - name: Create app user {{mysql_user_name}} and privileges @% and 'WITH GRANT OPTION' to {{mysql_database_name2}}
+#   community.mysql.mysql_user:
+#     name: "{{mysql_user_name}}"
+#     password: "{{mysql_user_password}}"
+#     append_privs: yes
+#     host: '%'
+#     priv: '{{mysql_database_name_2}}.*:ALL,GRANT'
+#     state: present
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+#   when: master==1
 
 # - name: Create repl user {{mysql_repl_user_name}} and privileges and 'WITH GRANT OPTION' [only on master]
 #   community.mysql.mysql_user:
@@ -149,3 +149,9 @@
 #     value: 1
 #     login_unix_socket: /var/run/mysqld/mysqld.sock
 #   when: master!=1
+
+- name: Set read_only variable to 1 persistently
+  community.mysql.mysql_variables:
+    variable: time_zone
+    value: '+8:00'
+    login_unix_socket: /var/run/mysqld/mysqld.sock

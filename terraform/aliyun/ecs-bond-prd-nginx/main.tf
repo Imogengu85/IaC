@@ -52,6 +52,17 @@ resource "alicloud_security_group_rule" "allow_tcp_443" {
   cidr_ip           = "0.0.0.0/0"
 }
 
+resource "alicloud_security_group_rule" "allow_intranet_tcp" {
+  type              = "ingress"
+  ip_protocol       = "tcp"
+  nic_type          = var.nic_type
+  policy            = "accept"
+  port_range        = "1/65535"
+  priority          = 1
+  security_group_id = alicloud_security_group.group.id
+  cidr_ip           = "172.16.0.0/12"
+}
+
 resource "alicloud_eip" "eip-cocafe" {
   address_name         = "${var.eip_name}-${format(var.count_format, count.index +1)}"
   bandwidth            = var.internet_max_bandwidth_out

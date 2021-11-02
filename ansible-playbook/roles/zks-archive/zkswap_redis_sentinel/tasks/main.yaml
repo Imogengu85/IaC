@@ -24,14 +24,14 @@
     state: restarted
     daemon_reload: yes
     name: redis
-  when: master==1
+  when: redis_master==1
 
 - name: restart slave redis
   systemd:
     state: restarted
     daemon_reload: yes
     name: redis
-  when: master!=1
+  when: redis_master!=1
 
 - name: restart redis-sentinel
   systemd:

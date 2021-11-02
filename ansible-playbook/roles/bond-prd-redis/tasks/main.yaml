@@ -1,4 +1,25 @@
 
+# - name: systemctl stop redis
+#   systemd:
+#     name: 'redis'
+#     enabled: no
+#     state: stopped
+
+# - name: systemctl stop redis-sentinel
+#   systemd:
+#     name: 'redis-sentinel'
+#     enabled: no
+#     state: stopped
+
+# - name: remove redis
+#   apt:
+#     name: 
+#       - 'redis'
+#       - 'redis-sentinel'
+#     update_cache: true
+#     state: absent
+
+
 - name: apt redis
   apt:
     name: 

@@ -104,14 +104,14 @@ resource "alicloud_dns_record" "nfo_p1_s" {
   name        = "cocafe.co"
   host_record = "nfo-p1.s"
   type        = "A"
-  value       = "47.100.193.199"
+  value       = "106.15.91.131"
 }
 
 resource "alicloud_dns_record" "nfo" {
   name        = "cocafe.co"
   host_record = "nfo"
-  type        = "CNAME"
-  value       = "nfo-p1.s.cocafe.co"
+  type        = "A"
+  value       = "106.15.91.131"
 }
 
 resource "alicloud_dns_record" "nfo_u1_s" {
@@ -201,6 +201,20 @@ resource "alicloud_dns_record" "bond_p7_s" {
 resource "alicloud_dns_record" "nfo_sim" {
   name        = "cocafe.co"
   host_record = "nfo-sim"
+  type        = "A"
+  value       = "106.15.91.131"
+}
+
+resource "alicloud_dns_record" "www" {
+  name        = "cocafe.co"
+  host_record = "www"
+  type        = "CNAME"
+  value       = "cocafe.co"
+}
+
+resource "alicloud_dns_record" "non" {
+  name        = "cocafe.co"
+  host_record = "@"
   type        = "A"
   value       = "106.15.91.131"
 }

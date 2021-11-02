@@ -1,0 +1,15 @@
+server {
+    listen 80;
+    server_name {{ non_www_domain_name }};
+    location / {
+            root /var/cocafe-output/{{ www_project_name }}/build;
+            try_files $uri $uri/ /index.html;
+            index index.html;
+    }
+}
+
+server {
+    listen 80;
+    server_name {{ www_domain_name }};
+    return 301 https://{{ non_www_domain_name }};
+}

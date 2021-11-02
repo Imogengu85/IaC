@@ -73,9 +73,17 @@
 #     chdir: /opt/clash/
 #     creates: clash-linux-amd64-v1.7.1
 
+# - name: upload config.yaml
+#   copy: 
+#     dest: /opt/config.yaml
+#     src: config.yaml
+#     owner: cocafe
+#     group: cocafe
+#     mode: '0644'
+
 - name: upload config.yaml
   copy: 
-    dest: /opt/config.yaml
+    dest: /opt/clash/config/config.yaml
     src: config.yaml
     owner: cocafe
     group: cocafe
@@ -96,13 +104,13 @@
 #     group: cocafe
 #     state: link
 
-- name: upload start_clash.sh
-  copy: 
-    dest: /opt/clash/start_clash.sh
-    src: start_clash.sh
-    owner: cocafe
-    group: cocafe
-    mode: '0755'
+# - name: upload start_clash.sh
+#   copy: 
+#     dest: /opt/clash/start_clash.sh
+#     src: start_clash.sh
+#     owner: cocafe
+#     group: cocafe
+#     mode: '0755'
 
 - name: stop clash
   become: yes

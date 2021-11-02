@@ -11,7 +11,7 @@ variable "image_id" {
 }
 
 variable "disk_size"{
-  default = 200
+  default = 300
 }
 variable "role" {
   default = "server"
