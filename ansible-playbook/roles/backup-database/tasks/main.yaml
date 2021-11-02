@@ -16,7 +16,7 @@
 - name: oss sync
   become: yes
   become_user: cocafe
-  local_action: ansible.builtin.command "/usr/local/bin/ossutil64 sync /home/cocafe/db_backups oss://bucket-databases-backup/databases-backups" {{ inventory_hostname }}
+  local_action: ansible.builtin.command "/usr/local/bin/ossutil64 sync /home/cocafe/db_backups oss://bucket-databases-backup/databases-backups"
   run_once:  yes
 
 # - name: upload sentinel config file 
