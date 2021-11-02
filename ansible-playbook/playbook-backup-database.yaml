@@ -1,0 +1,7 @@
+- hosts: 
+  - bond-prd-mysql
+  - mcd-p1
+  become: yes
+  remote_user: root
+  roles: 
+    - backup-database

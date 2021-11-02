@@ -22,7 +22,7 @@ bond-p3 master=0 server_id=2
 
 [mcd-prd]
 mcd-coVault ansible_ssh_host=mcd-p2.s.cocafe.co ansible_ssh_user=cocafe
-mcd-p1 ansible_ssh_host=mcd-p1.s.cocafe.co ansible_ssh_user=cocafe
+mcd-p1 ansible_ssh_host=mcd-p1.s.cocafe.co ansible_ssh_user=cocafe master=1
 
 [mcd-test]
 mcd-t1 ansible_ssh_host=mcd-t1.s.cocafe.co ansible_ssh_user=cocafe

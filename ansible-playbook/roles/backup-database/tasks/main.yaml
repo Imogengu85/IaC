@@ -1,0 +1,50 @@
+- name: Dump all databases to hostname.sql including master data
+  community.mysql.mysql_db:
+    state: dump
+    name: all
+    target: /tmp/{{ ansible_date_time.date }}.sql
+    master_data: 1
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  when: master==1
+
+- name: fetch mysql_backup
+  fetch:
+    src: /tmp/{{ ansible_date_time.date }}.sql
+    dest: /home/cocafe/db_backups/{{ inventory_hostname }}_{{ ansible_date_time.date }}.sql
+  when: master==1
+
+- name: oss sync
+  local_action: ansible.builtin.command ossutil64 cp /home/cocafe/db_backups/db_backups oss://bucket-databases-backup
+
+
+# - name: upload sentinel config file 
+#   template:
+#     dest: /etc/redis/sentinel.conf
+#     src: sentinel.conf.j2
+#     mode: 0640
+
+# - name: restart redis
+#   systemd:
+#     state: restarted
+#     daemon_reload: yes
+#     name: redis
+
+# - name: restart master redis
+#   systemd:
+#     state: restarted
+#     daemon_reload: yes
+#     name: redis
+#   when: redis_master==1
+
+# - name: restart slave redis
+#   systemd:
+#     state: restarted
+#     daemon_reload: yes
+#     name: redis
+#   when: redis_master!=1
+
+# - name: restart redis-sentinel
+#   systemd:
+#     state: restarted
+#     daemon_reload: yes
+#     name: redis-sentinel
