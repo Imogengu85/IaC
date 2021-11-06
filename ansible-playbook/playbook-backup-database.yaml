@@ -3,5 +3,6 @@
   - mcd-p1
   become: yes
   remote_user: root
+  gather_facts: True
   roles: 
     - backup-database
