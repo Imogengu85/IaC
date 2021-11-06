@@ -4,14 +4,18 @@
 
 ## Update logs
 
+- 11.07 
+  + Transform NFO UAT/TEST env into SZS & BOND env;
+  + Recycle NFO EP-1 PROD and MCD UAT env.
 - 10.25 Update BOND Production env informations.
 - 10.20 Update the BOND, NFO UAT;
 
 ## Project Name
 
 - mcd
-- porsche
+- pcn
 - nfo
+- szs
 - coportal
 - covault
 
@@ -41,7 +45,9 @@
 
 #### [PROD] BOND
 
-- URIs: nfo-sim.cocafe.co
+- URIs: 
+  + NFO:           https://nfo.cocafe.co
+  + Official Site: https://cocafe.co
 - Version: 
 
 | Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner |  User | Hardware |
@@ -70,6 +76,18 @@
 
 #### [UAT] BOND 
 
+- URIs: https://nfo-u.cocafe.co
+- Version:
+
+| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| bond-u1.s.cocafe.co | 47.100.25.40 | 172.16.0.229 | i-uf62fpujsppnu70p1ljp | bond 验收测试环境服务器1 |  |  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+| bond-u2.s.cocafe.co | 47.100.112.167 | 172.16.0.231 | i-uf6bsml3xp6iz2kwrey7 | bond 验收测试环境服务器2 |  |  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+| bond-u3.s.cocafe.co | 101.132.79.166 | 172.16.0.232| i-uf6ahsy0hptf86k59ns2 | bond 验收测试环境服务器3 |  |  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+| bond-u4.s.cocafe.co | 106.15.190.73 | 172.16.0.230 | ii-uf6byjhd4wd9oz41lkzu | bond 验收测试环境服务器4 |  |  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+| nfo-uat-slb | 139.224.54.7 | n/a | lb-uf6man15hmbfa97j42v0z | NFO验收测试环境负载均衡 | slb | slb | maogongyin | maogongyin | n/a | 
+ 
+
 - CDN: https://elements-test.cocafe.co
 - Project path:
   + NFO Project PATH: bucket-elements-test.oss-cn-shanghai.aliyuncs.com/nfo
@@ -82,40 +100,22 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | bucket-elements-test | oss-cn-shanghai.aliyuncs.com | oss-cn-shanghai-internal.aliyuncs.com | bucket-elements-test | CDN-NFO | https/http | maogongyin |
 
+### SZS
+
+#### [TEST] SZS
+
+- URIs: https://szs-t.cocafe.co
+- Version:
+
+| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| szs-t1.s.cocafe.co | 47.101.185.144 | 172.16.0.228 | i-uf6d5yupyj1qsz8or1cv | szs 开发/集成测试环境服务器1 |  |   | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+| szs-t2.s.cocafe.co | 139.196.206.78 | 172.16.0.233  | i-uf63yp8w5ku51aypy1f1 | szs 开发/集成测试环境服务器2/荔枝专用 |  |  | liyizhi | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+
 
 ### NFO
 
-#### [PROD] NFO
-
-- URIs: https://nfo.cocafe.co
-- Version:
-
-| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| nfo-p1.s.cocafe.co | 47.100.193.199  | 172.26.1.125 | i-uf6aic63zvv374pv23dj  | NFO 生产环境服务器Nginx | nfo-frontend | nginx | maogongyin | maogongyin,panchen | 2C/16G/20GB/10Mbps |
-
-#### [UAT] NFO
-
-- URIs: https://nfo-u.cocafe.co
-- Version:
-
-| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| nfo-u1.s.cocafe.co | 47.100.25.40 | 172.16.0.229 | i-uf62fpujsppnu70p1ljp | NFO 验收测试环境服务器 | nfo-frontend,nfo-backend | nginx,redis  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
-| nfo-u2.s.cocafe.co | 47.100.112.167 | 172.16.0.231 | i-uf6bsml3xp6iz2kwrey7 | NFO 验收测试环境服务器2 | nfo-frontend | nginx  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
-| nfo-u3.s.cocafe.co | 101.132.79.166 | 172.16.0.232| i-uf6ahsy0hptf86k59ns2 | NFO 验收测试环境服务器3 | nfo-backend | redis,mysql-master  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
-| nfo-u4.s.cocafe.co | 106.15.190.73 | 172.16.0.230 | ii-uf6byjhd4wd9oz41lkzu | NFO 验收测试环境服务器4 | coPortal,coVault | redis-master,mysql-slave  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
-| nfo-uat-slb | 139.224.54.7 | n/a | lb-uf6man15hmbfa97j42v0z | NFO验收测试环境负载均衡 | slb | slb | maogongyin | maogongyin | n/a | 
- 
-
-#### [TEST] NFO
-
-- URIs: https://nfo-t.cocafe.co
-- Version:
-
-| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| nfo-t1.s.cocafe.co | 47.101.185.144 | 172.16.0.228 | i-uf6d5yupyj1qsz8or1cv | NFO 集成测试环境服务器 | nfo-backend,coportal-backend,nfo-frontend | nginx,mysql  | maogongyin | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
+>项目结束，环境分配给szs(BOND项目)。
 
 ### PCN
 
@@ -140,16 +140,6 @@
 | mcd-p1.s.cocafe.co | 47.101.214.176 | 172.26.1.124 | i-uf6f415w6bf0fp7nvuf2 | McD 生产环境服务器 | McD-service,McD-frontend | nginx,mysql,redis | maogongyin | 4C/16G/20GB/10Mbps | 
 | mcd-p2.s.cocafe.co | 47.101.218.85 | 172.26.1.123 | i-uf6ij3ct1q59ej5uq34u | McD coVault服务器 | coVault | coVault | maogongyin | maogongyin,panchen | 2C/4G/20GB/10Mbps | 
 
-#### [UAT] McD - 此环境将于2021.11.6日回收
-
-- URIs: https://mcdnft-u.cocafe.co
-- Version:
-
-| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner |  User |  Hardware |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| mcd-u1.s.cocafe.co | 106.14.3.206 | 172.16.0.225 | i-uf6909ytx6tari2g5s2x | McD验收环境服务器 | go Apps | Mysql,Docker | maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi | 2C/16G/20GB/10Mbps | 
-
-
 #### [TEST] McD
 
 - URIs: https://mcdnft-t.cocafe.co
@@ -161,24 +151,14 @@
 
 ### 官网
 
-#### [UAT] Mainpage
+#### [PROD] Mainpage
 
-- URIs: https://www-u.cocafe.co
+- URIs: https://cocafe.co
 - Version:
 
 - ECS
 
-复用mcd-u1.s.cocafe.co
-
-| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User | Hardware |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| mcd-u1.s.cocafe.co | 106.14.3.206 | 172.16.0.225 | i-uf6909ytx6tari2g5s2x | McD验收环境服务器 | go Apps | Mysql,Docker | maogongyin | maogongyin | 2C/16G/20GB/10Mbps | 
-
-- OSS
-
-| ID | extranet_endpoint | intranet_endpoint | ResourceID | Description |  Service | Owner |
-| --- | --- | --- | --- | --- | --- | --- |
-| bucket-mainpage | oss-cn-shanghai.aliyuncs.com | oss-cn-shanghai-internal.aliyuncs.com | bucket-mainpage | OSS mainpage | https/http | maogongyin |
+复用bond-p6.s.cocafe.co和bond-p7.s.cocafe.co
 
 ### OPS server
 
@@ -191,4 +171,20 @@
 
 ### 废弃环境
 
+#### ~~[PROD] NFO - 此环境将于2021.12.12日回收~~
 
+- ~~URIs: https://nfo.cocafe.co~~
+- ~~Version:~~
+
+| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner | User |Hardware |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ~~nfo-p1.s.cocafe.co~~ | ~~47.100.193.199~~  | ~~172.26.1.125~~ | ~~i-uf6aic63zvv374pv23dj~~  | ~~NFO 生产环境服务器Nginx~~ | ~~nfo-frontend~~ | ~~nginx~~ | ~~maogongyin~~ | ~~maogongyin,panchen~~ | ~~2C/16G/20GB/10Mbps~~ |
+
+#### ~~[UAT] McD - 此环境于2021.11.6日回收~~
+
+- ~~URIs: https://mcdnft-u.cocafe.co~~
+- ~~Version:~~
+
+| Host Name | ServerIP | IntranetIP | ResourceID | Description | Application | Service | Owner |  User |  Hardware |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ~~mcd-u1.s.cocafe.co~~ | ~~106.14.3.206~~ | ~~172.16.0.225~~ | ~~i-uf6909ytx6tari2g5s2x~~ | ~~McD验收环境服务器~~ | ~~go Apps~~ | ~~Mysql,Docker~~ | ~~maogongyin~~ |~~maogongyin,panchen,yuanshanshan,wangpeiyu,liyizhi~~ | ~~2C/16G/20GB/10Mbps~~ | 

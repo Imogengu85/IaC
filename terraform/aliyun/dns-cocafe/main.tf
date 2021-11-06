@@ -72,18 +72,39 @@ resource "alicloud_dns_record" "prm_s" {
   value       = "47.100.52.18"
 }
 
-resource "alicloud_dns_record" "nfo_t1_s" {
+resource "alicloud_dns_record" "szs_t1_s" {
   name        = "cocafe.co"
-  host_record = "nfo-t1.s"
+  host_record = "szs-t1.s"
   type        = "A"
   value       = "47.101.185.144"
+}
+
+resource "alicloud_dns_record" "szs_t2_s" {
+  name        = "cocafe.co"
+  host_record = "szs-t2.s"
+  type        = "A"
+  value       = "139.196.206.78"
 }
 
 resource "alicloud_dns_record" "nfo_t" {
   name        = "cocafe.co"
   host_record = "nfo-t"
   type        = "CNAME"
-  value       = "nfo-t1.s.cocafe.co"
+  value       = "szs-t1.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "szs_t1" {
+  name        = "cocafe.co"
+  host_record = "szs-t1"
+  type        = "CNAME"
+  value       = "szs-t1.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "szs_t2" {
+  name        = "cocafe.co"
+  host_record = "szs-t2"
+  type        = "CNAME"
+  value       = "szs-t2.s.cocafe.co"
 }
 
 resource "alicloud_dns_record" "_dnsauth_elements-test" {
@@ -114,9 +135,9 @@ resource "alicloud_dns_record" "nfo" {
   value       = "106.15.91.131"
 }
 
-resource "alicloud_dns_record" "nfo_u1_s" {
+resource "alicloud_dns_record" "bond_u1_s" {
   name        = "cocafe.co"
-  host_record = "nfo-u1.s"
+  host_record = "bond-u1.s"
   type        = "A"
   value       = "47.100.25.40"
 }
@@ -128,23 +149,23 @@ resource "alicloud_dns_record" "nfo_u" {
   value       = "139.224.54.7"
 }
 
-resource "alicloud_dns_record" "nfo_u2_s" {
+resource "alicloud_dns_record" "bond_u2_s" {
   name        = "cocafe.co"
-  host_record = "nfo-u2.s"
+  host_record = "bond-u2.s"
   type        = "A"
   value       = "47.100.112.167"
 }
 
-resource "alicloud_dns_record" "nfo_u3_s" {
+resource "alicloud_dns_record" "bond_u3_s" {
   name        = "cocafe.co"
-  host_record = "nfo-u3.s"
+  host_record = "bond-u3.s"
   type        = "A"
   value       = "101.132.79.166"
 }
 
-resource "alicloud_dns_record" "nfo_u4_s" {
+resource "alicloud_dns_record" "bond_u4_s" {
   name        = "cocafe.co"
-  host_record = "nfo-u4.s"
+  host_record = "bond-u4.s"
   type        = "A"
   value       = "106.15.190.73"
 }

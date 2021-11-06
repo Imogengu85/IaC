@@ -1,5 +1,5 @@
 variable "number" {
-  default = "1"
+  default = "3"
 }
 
 variable "count_format" {
@@ -11,22 +11,22 @@ variable "image_id" {
 }
 
 variable "disk_size"{
-  default = 400
+  default = 20
 }
 variable "role" {
   default = "server"
 }
 
 variable "project" {
-  default = "prm"
+  default = "bond"
 }
 
 variable "short_name" {
-  default = "prometheus"
+  default = "bond-uat"
 }
 
 variable "ecs_type" {
-  default = "ecs.g7.xlarge"
+  default = "ecs.r7.large"
 }
 
 variable "internet_charge_type" {
@@ -46,7 +46,7 @@ variable "nic_type" {
 }
 
 variable "eip_name" {
-  default = "eip-prm-uat"
+  default = "eip-bond-uat"
 }
 
 variable "vswitch_id" {

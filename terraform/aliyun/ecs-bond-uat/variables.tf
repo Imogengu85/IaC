@@ -18,11 +18,11 @@ variable "role" {
 }
 
 variable "project" {
-  default = "nfo"
+  default = "bond"
 }
 
 variable "short_name" {
-  default = "nfo-test"
+  default = "bond-uat"
 }
 
 variable "ecs_type" {
@@ -46,7 +46,7 @@ variable "nic_type" {
 }
 
 variable "eip_name" {
-  default = "eip-nfo-test"
+  default = "eip-bond-uat"
 }
 
 variable "vswitch_id" {

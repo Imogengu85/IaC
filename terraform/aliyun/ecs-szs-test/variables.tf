@@ -1,5 +1,5 @@
 variable "number" {
-  default = "3"
+  default = "1"
 }
 
 variable "count_format" {
@@ -18,11 +18,11 @@ variable "role" {
 }
 
 variable "project" {
-  default = "nfo"
+  default = "szs"
 }
 
 variable "short_name" {
-  default = "nfo-uat"
+  default = "szs-test"
 }
 
 variable "ecs_type" {
@@ -46,7 +46,7 @@ variable "nic_type" {
 }
 
 variable "eip_name" {
-  default = "eip-nfo-uat"
+  default = "eip-szs-test"
 }
 
 variable "vswitch_id" {
