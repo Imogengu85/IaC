@@ -7,7 +7,7 @@
 
 - name: Set backup_time fact
   set_fact:
-    backup_time : "{{ _controller_time_ }}"
+    backup_time : "{{ _controller_time_.stdout_lines[0] }}"
 
 - name: Dump all databases to hostname.sql including master data
   community.mysql.mysql_db:
