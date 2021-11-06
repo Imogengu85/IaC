@@ -1,5 +1,5 @@
 - name: Get time from the local machine
-  local_action: ansible.builtin.command date +%y%m%d-%H:%M
+  local_action: ansible.builtin.command date +%y%m%d-%H-%M
   changed_when: false
   register: _controller_time_
   run_once:  yes
