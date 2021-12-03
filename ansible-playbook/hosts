@@ -6,6 +6,8 @@ bond-p4 ansible_ssh_host=bond-p4.s.cocafe.co ansible_ssh_user=cocafe
 bond-p5 ansible_ssh_host=bond-p5.s.cocafe.co ansible_ssh_user=cocafe
 bond-p6 ansible_ssh_host=bond-p6.s.cocafe.co ansible_ssh_user=cocafe
 bond-p7 ansible_ssh_host=bond-p7.s.cocafe.co ansible_ssh_user=cocafe
+bond-p8 ansible_ssh_host=bond-p8.s.cocafe.co ansible_ssh_user=cocafe
+bond-p9 ansible_ssh_host=bond-p9.s.cocafe.co ansible_ssh_user=cocafe
 
 [bond-prd-nginx]
 bond-p6
@@ -20,6 +22,12 @@ bond-p4 redis_master=1
 bond-p2 master=1 server_id=1
 bond-p3 master=0 server_id=2
 
+[bond-u]
+bond-u1 ansible_ssh_host=bond-u1.s.cocafe.co ansible_ssh_user=cocafe
+bond-u2 ansible_ssh_host=bond-u2.s.cocafe.co ansible_ssh_user=cocafe
+bond-u3 ansible_ssh_host=bond-u3.s.cocafe.co ansible_ssh_user=cocafe
+bond-u4 ansible_ssh_host=bond-u4.s.cocafe.co ansible_ssh_user=cocafe
+
 [mcd-prd]
 mcd-coVault ansible_ssh_host=mcd-p2.s.cocafe.co ansible_ssh_user=cocafe
 mcd-p1 ansible_ssh_host=mcd-p1.s.cocafe.co ansible_ssh_user=cocafe master=1
@@ -28,20 +36,14 @@ mcd-p1 ansible_ssh_host=mcd-p1.s.cocafe.co ansible_ssh_user=cocafe master=1
 mcd-t1 ansible_ssh_host=mcd-t1.s.cocafe.co ansible_ssh_user=cocafe
 
 [mcd-uat]
-mcd-u1 ansible_ssh_host=mcd-u1.s.cocafe.co ansible_ssh_user=cocafe
 cfx-m1 ansible_ssh_host=cfx-m1.s.cocafe.co ansible_ssh_user=cocafe
 
 [pcn-uat]
 pcn-u1 ansible_ssh_host=pcn-u1.s.cocafe.co ansible_ssh_user=cocafe
 
-[nfo-test]
-nfo-t1 ansible_ssh_host=nfo-t1.s.cocafe.co ansible_ssh_user=cocafe
-
-[nfo-uat]
-nfo-u1 ansible_ssh_host=nfo-u1.s.cocafe.co ansible_ssh_user=cocafe
-nfo-u2 ansible_ssh_host=nfo-u2.s.cocafe.co ansible_ssh_user=cocafe
-nfo-u3 ansible_ssh_host=nfo-u3.s.cocafe.co ansible_ssh_user=cocafe
-nfo-u4 ansible_ssh_host=nfo-u4.s.cocafe.co ansible_ssh_user=cocafe
+[szs-test]
+szs-t1 ansible_ssh_host=szs-t1.s.cocafe.co ansible_ssh_user=cocafe
+szs-t2 ansible_ssh_host=szs-t2.s.cocafe.co ansible_ssh_user=cocafe
 
 [nfo-uat-mysql]
 nfo-u3 master=1 server_id=1
@@ -52,31 +54,26 @@ nfo-u1 redis_master=0
 nfo-u3 redis_master=0
 nfo-u4 redis_master=1
 
-[nfo-prd]
-nfo-p1 ansible_ssh_host=nfo-p1.s.cocafe.co ansible_ssh_user=cocafe
-
-[mc]
-mcmemories-1 ansible_ssh_host=47.241.178.221 ansible_ssh_user=cocafe
-
-[mc-prd]
-mc-memories ansible_ssh_host=47.57.70.0 ansible_ssh_user=cocafe
-mc-bastion ansible_ssh_host=47.243.157.5 ansible_ssh_user=cocafe
-
-[mc-prd-memories]
-mc-memories
-
-[mainpage]
-mainpage-web ansible_ssh_host=8.210.254.249 ansible_ssh_user=cocafe
-
 [trj-prd]
 trj ansible_ssh_host=trj.s.cocafe.co ansible_ssh_user=cocafe
 
 [prometheus]
 prm ansible_ssh_host=prm.s.cocafe.co ansible_ssh_user=cocafe
 
-[clash]
-clash-01 ansible_ssh_host=47.241.161.208 ansible_ssh_user=cocafe
-
 [new-svr]
-bond-p6
-bond-p7
+bond-p8
+bond-p9
+
+[recycled]
+mcd-u1 ansible_ssh_host=mcd-u1.s.cocafe.co ansible_ssh_user=cocafe
+clash-01 ansible_ssh_host=47.241.161.208 ansible_ssh_user=cocafe
+mainpage-web ansible_ssh_host=8.210.254.249 ansible_ssh_user=cocafe
+mc-memories ansible_ssh_host=47.57.70.0 ansible_ssh_user=cocafe
+mc-bastion ansible_ssh_host=47.243.157.5 ansible_ssh_user=cocafe
+mcmemories-1 ansible_ssh_host=47.241.178.221 ansible_ssh_user=cocafe
+nfo-p1 ansible_ssh_host=nfo-p1.s.cocafe.co ansible_ssh_user=cocafe
+nfo-u1 ansible_ssh_host=nfo-u1.s.cocafe.co ansible_ssh_user=cocafe
+nfo-u2 ansible_ssh_host=nfo-u2.s.cocafe.co ansible_ssh_user=cocafe
+nfo-u3 ansible_ssh_host=nfo-u3.s.cocafe.co ansible_ssh_user=cocafe
+nfo-u4 ansible_ssh_host=nfo-u4.s.cocafe.co ansible_ssh_user=cocafe
+nfo-t1 ansible_ssh_host=nfo-t1.s.cocafe.co ansible_ssh_user=cocafe

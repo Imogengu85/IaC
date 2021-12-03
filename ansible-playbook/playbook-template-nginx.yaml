@@ -1,0 +1,6 @@
+- hosts: 
+  - bond-prd-nginx
+  become: yes
+  remote_user: root
+  roles: 
+    - template-nginx

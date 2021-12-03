@@ -59,8 +59,10 @@
 | bond-p5.s.cocafe.co | 106.15.227.24 | 172.26.1.126 | i-uf6byjhd4wdc3wf2a86g | coPortal 生产环境服务器1 | coPortal | - | maogongyin | maogongyin, panchen | 2C/16G/80GB/10Mbps |
 | bond-p6.s.cocafe.co | 106.14.148.20 | 172.26.1.132 | i-uf6gvcgydvhtv22xmfrf | BOND/NFO 生产环境服务器 1 | nfo-frondend,nfo-backend | nginx | maogongyin | maogongyin, panchen | 2C/16G/50GB/10Mbps |
 | bond-p7.s.cocafe.co | 139.224.112.153 | 172.26.1.131 | i-uf6ahsy0hpthterpwmjv | BOND/NFO 生产环境服务器 2 | nfo-frondend,nfo-backend | nginx | maogongyin | maogongyin, panchen | 2C/16G/50GB/10Mbps |
-| bond-prd-slb | 106.15.91.131 | n/a | lb-uf6xp6oabovof6kht8dvv | BOND生产环境负载均衡 | slb | slb | maogongyin | maogongyin | 50Mbps | 
-
+| bond-p8.s.cocafe.co | 139.196.112.64| 172.26.1.133 | i-uf69bsbsl7wy9fg7ry6t | BOND/SZS 生产环境服务器 1 | seazen-space-frontend,seazen-space-backend | nginx | panchen | maogongyin, panchen | 2C/16G/50GB/10Mbps |
+| bond-p9.s.cocafe.co | 139.224.64.210 | 172.26.1.134 | i-uf634e5mp9u171le6swb | BOND/SZS 生产环境服务器 2 | seazen-space-frontend,seazen-space-backend | nginx | panchen | maogongyin, panchen | 2C/16G/50GB/10Mbps |
+| bond-prd-slb | 106.15.91.131 | n/a | lb-uf6xp6oabovof6kht8dvv | BOND/NFO/Nayuki生产环境负载均衡 | slb | slb | maogongyin | maogongyin | 50Mbps | 
+| szs-prd-slb | 47.101.162.108  | n/a | lb-uf6c1jcso6s5zgkfj7f7m | BOND/SZS生产环境负载均衡 | slb | slb | panchen | panchen | 50Mbps | 
 
 - CDN: https://elements.cocafe.co
 - Project path:

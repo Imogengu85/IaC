@@ -1,0 +1,6 @@
+- hosts: 
+  - szs-t2
+  become: yes
+  remote_user: root
+  roles: 
+    - template-single-redis

@@ -239,3 +239,73 @@ resource "alicloud_dns_record" "non" {
   type        = "A"
   value       = "106.15.91.131"
 }
+
+resource "alicloud_dns_record" "seazennft_t1" {
+  name        = "cocafe.co"
+  host_record = "seazennft-t1"
+  type        = "CNAME"
+  value       = "szs-t1.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "seazennft_t2" {
+  name        = "cocafe.co"
+  host_record = "seazennft-t2"
+  type        = "CNAME"
+  value       = "szs-t2.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "coportal_t2" {
+  name        = "cocafe.co"
+  host_record = "coportal-t2"
+  type        = "CNAME"
+  value       = "szs-t2.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "coportal_t1" {
+  name        = "cocafe.co"
+  host_record = "coportal-t1"
+  type        = "CNAME"
+  value       = "szs-t1.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "nayuki_t1" {
+  name        = "cocafe.co"
+  host_record = "nayuki-t1"
+  type        = "CNAME"
+  value       = "szs-t1.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "nayuki_t2" {
+  name        = "cocafe.co"
+  host_record = "nayuki-t2"
+  type        = "CNAME"
+  value       = "szs-t2.s.cocafe.co"
+}
+
+resource "alicloud_dns_record" "bond_p8_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p8.s"
+  type        = "A"
+  value       = "139.196.112.64"
+}
+
+resource "alicloud_dns_record" "bond_p9_s" {
+  name        = "cocafe.co"
+  host_record = "bond-p9.s"
+  type        = "A"
+  value       = "139.224.64.210"
+}
+
+resource "alicloud_dns_record" "seazennft" {
+  name        = "cocafe.co"
+  host_record = "seazennft"
+  type        = "A"
+  value       = "47.101.162.108"
+}
+
+resource "alicloud_dns_record" "nayuki" {
+  name        = "cocafe.co"
+  host_record = "nayuki"
+  type        = "A"
+  value       = "106.15.91.131"
+}

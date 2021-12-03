@@ -158,6 +158,8 @@ rules:
   # optional param "no-resolve" for IP rules (GEOIP, IP-CIDR, IP-CIDR6)
   - IP-CIDR,127.0.0.0/8,DIRECT
   - IP-CIDR,172.16.0.0/12,DIRECT
+  - DOMAIN-KEYWORD,pinata,DIRECT
+  - DOMAIN,api.pinata.cloud,DIRECT
   - GEOIP,CN,DIRECT
   - DST-PORT,80,DIRECT
   - SRC-PORT,7777,DIRECT

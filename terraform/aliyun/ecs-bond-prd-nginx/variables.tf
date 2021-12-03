@@ -1,5 +1,5 @@
 variable "number" {
-  default = "2"
+  default = "4"
 }
 
 variable "count_format" {
