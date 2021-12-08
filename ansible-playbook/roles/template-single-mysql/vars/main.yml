@@ -1,5 +1,8 @@
 ---
 mysql_database_name: nayuki
+mysql_database_name_2: nfo
+mysql_database_name_3: coportal
+mysql_database_name_4: szsdb
 mysql_user_name: cocafe
 mysql_user_password: Nftfanatic10@$
 mysql_config_file: /etc/mysql/mysql.conf.d/mysqld.cnf

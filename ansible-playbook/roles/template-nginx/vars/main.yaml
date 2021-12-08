@@ -1,6 +1,6 @@
 ---
-service_ip_1: 172.26.1.131
+service_ip_1: 172.26.1.126
 service_ip_2: 172.26.1.132
-service_port: 62002
-server_domain_name: nayuki.cocafe.co
-project_name: nayuki
+service_port: 61670
+server_domain_name: coportal.cocafe.co
+project_name: coportal

@@ -309,3 +309,10 @@ resource "alicloud_dns_record" "nayuki" {
   type        = "A"
   value       = "106.15.91.131"
 }
+
+resource "alicloud_dns_record" "coportal" {
+  name        = "cocafe.co"
+  host_record = "coportal"
+  type        = "A"
+  value       = "106.15.91.131"
+}

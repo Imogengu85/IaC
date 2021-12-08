@@ -1,5 +1,5 @@
 - hosts: 
-  - szs-t2
+  - prm
   become: yes
   remote_user: root
   roles: 

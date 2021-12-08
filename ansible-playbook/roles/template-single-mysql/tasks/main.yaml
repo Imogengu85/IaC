@@ -1,47 +1,47 @@
-# - name: apt install mysql,pip3,other dependancy
-#   apt:
-#     name: 
-#       - mysql-server
-#       - python3-pip
-#       - python3-dev
-#       - default-libmysqlclient-dev
-#       - build-essential
-#     update_cache: true
-#     state: present
+- name: apt install mysql,pip3,other dependancy
+  apt:
+    name: 
+      - mysql-server
+      - python3-pip
+      - python3-dev
+      - default-libmysqlclient-dev
+      - build-essential
+    update_cache: true
+    state: present
 
-# - name: pip install PyMySQL
-#   pip:
-#     name: 
-#       - PyMySQL
+- name: pip install PyMySQL
+  pip:
+    name: 
+      - PyMySQL
 
-# - name: set mysql binding address to *
-#   lineinfile:
-#     path: "{{mysql_config_file}}"
-#     regexp: '^bind-address'
-#     line: 'bind-address  = *'
-#     state: present
+- name: set mysql binding address to *
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^bind-address'
+    line: 'bind-address  = *'
+    state: present
 
-# - name: set mysql configure log_bin [only on master]
-#   lineinfile:
-#     path: "{{mysql_config_file}}"
-#     regexp: '^log_bin'
-#     insertafter: '^#log_bin'
-#     line: 'log_bin			= /var/log/mysql/master-bin.log'
-#     state: present
+- name: set mysql configure log_bin [only on master]
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^log_bin'
+    insertafter: '^#log_bin'
+    line: 'log_bin			= /var/log/mysql/master-bin.log'
+    state: present
 
-# - name: set mysql server_id
-#   lineinfile:
-#     path: "{{mysql_config_file}}"
-#     regexp: '^server-id'
-#     insertafter: '^#server-id'
-#     line: 'server-id		= 1'
-#     state: present
+- name: set mysql server_id
+  lineinfile:
+    path: "{{mysql_config_file}}"
+    regexp: '^server-id'
+    insertafter: '^#server-id'
+    line: 'server-id		= 1'
+    state: present
 
-# - name: restart mysql server
-#   systemd:
-#     name: mysql
-#     state: restarted
-#     daemon-reload: yes
+- name: restart mysql server
+  systemd:
+    name: mysql
+    state: restarted
+    daemon-reload: yes
 
 - name: create database {{mysql_database_name}}
   community.mysql.mysql_db:
@@ -49,12 +49,70 @@
     state: present
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
+- name: create database {{mysql_database_name_2}}
+  community.mysql.mysql_db:
+    name: "{{mysql_database_name_2}}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: create database {{mysql_database_name_3}}
+  community.mysql.mysql_db:
+    name: "{{mysql_database_name_3}}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: create database {{mysql_database_name_4}}
+  community.mysql.mysql_db:
+    name: "{{mysql_database_name_4}}"
+    state: present
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+# - name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
+#   community.mysql.mysql_user:
+#     name: "{{mysql_user_name}}"
+#     password: "{{mysql_user_password}}"
+#     host: localhost
+#     priv: '{{mysql_database_name}}.*:ALL,GRANT'
+#     state: present
+#     append_privs: yes
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+
 - name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
   community.mysql.mysql_user:
     name: "{{mysql_user_name}}"
     password: "{{mysql_user_password}}"
-    host: localhost
+    host: '%'
     priv: '{{mysql_database_name}}.*:ALL,GRANT'
+    state: present
+    append_privs: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    host: '%'
+    priv: '{{mysql_database_name_2}}.*:ALL,GRANT'
+    state: present
+    append_privs: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    host: '%'
+    priv: '{{mysql_database_name_3}}.*:ALL,GRANT'
+    state: present
+    append_privs: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Create app user {{mysql_user_name}} and privileges @localhost and 'WITH GRANT OPTION' 
+  community.mysql.mysql_user:
+    name: "{{mysql_user_name}}"
+    password: "{{mysql_user_password}}"
+    host: '%'
+    priv: '{{mysql_database_name_4}}.*:ALL,GRANT'
     state: present
     append_privs: yes
     login_unix_socket: /var/run/mysqld/mysqld.sock
