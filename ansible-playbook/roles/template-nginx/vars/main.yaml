@@ -1,6 +1,6 @@
 ---
-service_ip_1: 172.26.1.126
-service_ip_2: 172.26.1.132
-service_port: 61670
-server_domain_name: coportal.cocafe.co
-project_name: coportal
+service_ip_1: 172.26.1.133	
+service_ip_2: 172.26.1.134
+service_port: 62003
+server_domain_name: wuyue-cbb.cocafe.co
+project_name: wuyue-cbb

@@ -1,5 +1,5 @@
 - hosts: 
-  - bond-prd-nginx
+  - bond-p9
   become: yes
   remote_user: root
   roles: 
