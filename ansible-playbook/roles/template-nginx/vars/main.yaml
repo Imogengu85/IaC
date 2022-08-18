@@ -1,6 +1,8 @@
 ---
-service_ip_1: 172.26.1.133	
-service_ip_2: 172.26.1.134
-service_port: 62003
-server_domain_name: wuyue-cbb.cocafe.co
-project_name: wuyue-cbb
+service_ip_1: 172.26.1.132
+service_ip_2: 172.26.1.131
+service_port: 62005
+# server_domain_name: www-t.stardao.cc
+# project_name: stardao-t
+server_domain_name: yinhe.cocafe.co
+project_name: yinhe
